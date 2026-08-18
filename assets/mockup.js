@@ -799,6 +799,6 @@
     </svg>`;
   }
 
-  global.MOCK = { tshirt, bandana, chapelet, produit, pain, etape, croix, lys, etoile, epi, monogramme };
+  global.MOCK = { tshirt, bandana, chapelet, produit, pain, etape, imprimeVerset, croix, lys, etoile, epi, monogramme };
 
 })(window);

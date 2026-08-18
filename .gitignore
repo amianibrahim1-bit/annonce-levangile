@@ -1,2 +1,7 @@
 .DS_Store
 **/.DS_Store
+
+# fichiers de mockup, volontairement hors du dépôt
+marque/versets/
+marque/export-versets.html
+marque/versets-annonce-levangile.zip
