@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mon panier | Annonce l’Évangile</title>
+<meta name="description" content="Votre panier | Annonce l’Évangile.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)'%3E%3Cpath d='M8,8 L40,8 L24,24 Z' fill='%23563A76'/%3E%3Cpath d='M40,8 L40,40 L24,24 Z' fill='%238E2431'/%3E%3Cpath d='M8,40 L40,40 L24,24 Z' fill='%232E6B4F'/%3E%3Cpath d='M8,8 L8,40 L24,24 Z' fill='%23EBDDBC'/%3E%3C/g%3E%3Cg stroke='%23B08A3E' stroke-width='4.5' stroke-linecap='round'%3E%3Cline x1='24' y1='12' x2='24' y2='36'/%3E%3Cline x1='14' y1='20' x2='34' y2='20'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div id="entete-site"></div>
+
+<section class="entete-page">
+  <div class="wrap-etroit">
+    <p class="fil"><a href="index.html">Accueil</a> · Mon panier</p>
+    <h1>Mon panier</h1>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="panier-grille" id="panier-grille"></div>
+</div>
+
+<div id="pied-site"></div>
+
+<script src="assets/config.js"></script>
+<script src="assets/liturgie.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/mockup.js"></script>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+  const P = Site.Panier;
+
+  function visuel(item){
+    const prod = Site.produitParId(item.id);
+    if(item.verset) return MOCK.tshirt({ couleur:item.couleur, design:"verset", verset:item.verset });
+    return MOCK.produit(prod, item.couleur);
+  }
+
+  function rendre(){
+    const items = P.lire();
+    const g = Site.$("#panier-grille");
+
+    if(!items.length){
+      g.innerHTML = `<div class="vide" style="grid-column:1/-1">
+        <h2>Votre panier est vide</h2>
+        <p class="chapeau" style="margin:0 auto 26px">Peut-être qu'une parole vous attend.</p>
+        <a class="btn" href="pain-de-vie.html">Recevoir ma parole</a>
+        <a class="btn btn-clair" href="boutique.html" style="margin-left:10px">Voir la boutique</a>
+      </div>`;
+      return;
+    }
+
+    const lignes = items.map((it,i)=>`
+      <div class="ligne">
+        <div class="ligne-visuel">${visuel(it)}</div>
+        <div>
+          <h3>${it.nom}</h3>
+          <div class="ligne-meta">${[Site.libCouleur(it.couleur), it.taille].filter(x => x && x !== "Imprimé").join(" · ")}</div>
+          ${it.verset ? `<p class="ligne-verset">« ${it.verset.t} » (${it.verset.r})</p>` : ""}
+          <div class="qte">
+            <button data-m="${i}" aria-label="Retirer un">−</button>
+            <span>${it.qte}</span>
+            <button data-p="${i}" aria-label="Ajouter un">+</button>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div class="prix">${Site.prix(it.prix * it.qte)}</div>
+          <button class="supprimer" data-s="${i}">Retirer</button>
+        </div>
+      </div>`).join("");
+
+    const port = P.fraisPort();
+    const reste = (CFG.livraison.gratuiteDes || 0) - P.sousTotal();
+
+    g.innerHTML = `
+      <div>
+        ${lignes}
+        <p style="margin-top:26px"><a href="boutique.html" class="lien-fleche">← Continuer mes achats</a></p>
+      </div>
+      <aside class="recap">
+        <h3 style="margin-top:0">Récapitulatif</h3>
+        <div class="recap-ligne"><span>Sous-total</span><span>${Site.prix(P.sousTotal())}</span></div>
+        <div class="recap-ligne"><span>Livraison</span><span>${port ? Site.prix(port) : "Offerte"}</span></div>
+        ${reste > 0 ? `<p class="aide">Plus que ${Site.prix(reste)} pour la livraison offerte.</p>` : ""}
+        <div class="recap-total"><span>Total</span><span>${Site.prix(P.total())}</span></div>
+
+        <form id="commande" style="margin-top:24px">
+          <div class="duo">
+            <div class="champ"><label for="nom">Nom et prénom</label><input id="nom" name="nom" required></div>
+            <div class="champ"><label for="email">E-mail</label><input id="email" name="email" type="email" required></div>
+          </div>
+          <div class="champ"><label for="adresse">Adresse</label><input id="adresse" name="adresse" required></div>
+          <div class="duo">
+            <div class="champ"><label for="cp">Code postal</label><input id="cp" name="cp" required></div>
+            <div class="champ"><label for="ville">Ville</label><input id="ville" name="ville" required></div>
+          </div>
+          <div class="champ"><label for="pays">Pays</label>
+            <select id="pays" name="pays">
+              <option>France</option><option>Belgique</option><option>Suisse</option>
+              <option>Luxembourg</option><option>Canada</option><option>Autre</option>
+            </select>
+          </div>
+          <div class="champ"><label for="mot">Mot sur la carte (facultatif)</label>
+            <textarea id="mot" name="mot" style="min-height:80px" placeholder="Nous l'écrivons à la main sur la carte glissée dans le paquet."></textarea>
+          </div>
+          <button class="btn btn-large" type="submit">Envoyer ma commande</button>
+          <p class="aide centre">Nous vous répondons sous 24 h avec le récapitulatif et le moyen de paiement.
+             Aucun prélèvement n'a lieu à cette étape.</p>
+        </form>
+        <div id="zone-paiement"></div>
+        <button class="supprimer" id="vider" style="margin-top:14px;width:100%">Vider le panier</button>
+      </aside>`;
+
+    Site.$$("[data-p]").forEach(b=>b.onclick=()=>P.modifier(+b.dataset.p, 1));
+    Site.$$("[data-m]").forEach(b=>b.onclick=()=>P.modifier(+b.dataset.m, -1));
+    Site.$$("[data-s]").forEach(b=>b.onclick=()=>P.retirer(+b.dataset.s));
+    Site.$("#vider").onclick = ()=>{ if(confirm("Vider entièrement le panier ?")) P.vider(); };
+    Site.$("#commande").onsubmit = envoyer;
+
+    if(CFG.paiementActif && CFG.lienPaiement){
+      Site.$("#zone-paiement").innerHTML =
+        `<a class="btn btn-large btn-or" href="${CFG.lienPaiement}" style="margin-top:12px">Payer en ligne</a>`;
+    }
+  }
+
+  function envoyer(e){
+    e.preventDefault();
+    const f = e.target;
+    const d = k => (f[k] && f[k].value || "").trim();
+    const items = P.lire();
+
+    const detail = items.map(i =>
+      `• ${i.qte} × ${[i.nom, Site.libCouleur(i.couleur), i.taille].filter(x => x && x !== "Imprimé").join(", ")}`
+      + (i.verset ? `\n   Parole à imprimer : « ${i.verset.t} » (${i.verset.r})` : "")
+      + `\n   ${Site.prix(i.prix * i.qte)}`
+    ).join("\n");
+
+    const corps =
+`Bonjour Marie,
+
+Je souhaite passer la commande suivante :
+
+${detail}
+
+Sous-total : ${Site.prix(P.sousTotal())}
+Livraison : ${P.fraisPort() ? Site.prix(P.fraisPort()) : "offerte"}
+TOTAL : ${Site.prix(P.total())}
+
+Livraison à :
+${d("nom")}
+${d("adresse")}
+${d("cp")} ${d("ville")}
+${d("pays")}
+
+E-mail : ${d("email")}
+${d("mot") ? "\nMot à écrire sur la carte :\n" + d("mot") : ""}
+
+Merci beaucoup,
+${d("nom")}`;
+
+    const sujet = "Commande de " + d("nom") + " (" + Site.prix(P.total()) + ")";
+    const lien = "mailto:" + (CFG.email || "") +
+      "?subject=" + encodeURIComponent(sujet) + "&body=" + encodeURIComponent(corps);
+
+    window.location.href = lien;
+    Site.toast("Votre logiciel de messagerie s'ouvre avec la commande.");
+    return false;
+  }
+
+  document.addEventListener("panier:maj", rendre);
+  rendre();
+})();
+</script>
+</body>
+</html>

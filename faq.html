@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questions fréquentes : tailles, livraison, retours | Annonce l’Évangile</title>
+<meta name="description" content="Guide des tailles, délais de livraison, retours et entretien. Toutes les réponses en une page.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)'%3E%3Cpath d='M8,8 L40,8 L24,24 Z' fill='%23563A76'/%3E%3Cpath d='M40,8 L40,40 L24,24 Z' fill='%238E2431'/%3E%3Cpath d='M8,40 L40,40 L24,24 Z' fill='%232E6B4F'/%3E%3Cpath d='M8,8 L8,40 L24,24 Z' fill='%23EBDDBC'/%3E%3C/g%3E%3Cg stroke='%23B08A3E' stroke-width='4.5' stroke-linecap='round'%3E%3Cline x1='24' y1='12' x2='24' y2='36'/%3E%3Cline x1='14' y1='20' x2='34' y2='20'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .tableau{width:100%;border-collapse:collapse;margin:22px 0;font-size:.95rem;background:#fff;
+           border:1px solid var(--bordure);border-radius:10px;overflow:hidden}
+  .tableau th,.tableau td{padding:12px 14px;border-bottom:1px solid var(--bordure);text-align:left}
+  .tableau th{font-family:var(--ui);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
+              background:var(--creme-2);color:var(--encre)}
+  .tableau tr:last-child td{border-bottom:0}
+  .enveloppe-tableau{overflow-x:auto}
+</style>
+</head>
+<body>
+
+<div id="entete-site"></div>
+
+<section class="entete-page">
+  <div class="wrap-etroit">
+    <p class="fil"><a href="index.html">Accueil</a> · Questions fréquentes</p>
+    <h1>Questions fréquentes</h1>
+    <p class="chapeau" style="margin:0 auto">Si votre question n'y figure pas, écrivez-nous : nous répondons
+      nous-mêmes, sous 24 heures ouvrées.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap-etroit">
+
+    <h2 id="pain-de-vie">Le Pain de Vie</h2>
+    <div class="accordeon">
+      <details open><summary>Comment la parole est-elle choisie ?</summary>
+        <div class="corps">Elle est tirée au hasard parmi plus de quarante versets et paroles de saints que nous
+          avons retenus un par un. Nous évitons de vous redonner une parole déjà reçue récemment. Personne ne
+          l'oriente : c'est ce qui fait la beauté de la chose.</div></details>
+      <details><summary>Puis-je changer de parole si celle-ci ne me convient pas ?</summary>
+        <div class="corps">Oui. Le bouton « Recevoir une autre parole » en tire une nouvelle. Beaucoup de personnes
+          gardent pourtant la première : elle tombe souvent juste.</div></details>
+      <details><summary>Puis-je demander un verset précis ?</summary>
+        <div class="corps">Bien sûr. Passez commande avec la parole de votre choix, puis répondez à notre e-mail de
+          confirmation en indiquant le verset et la traduction souhaités. Nous le composons sans supplément.</div></details>
+      <details><summary>Deux personnes peuvent-elles recevoir le même verset ?</summary>
+        <div class="corps">C'est possible, comme deux personnes peuvent ouvrir leur Bible à la même page. Mais la mise
+          en page, la couleur et la date d'impression font que votre t-shirt n'est pas tout à fait le même
+          qu'un autre.</div></details>
+      <details><summary>Quelle traduction utilisez-vous ?</summary>
+        <div class="corps">La traduction Louis Segond, qui appartient au domaine public. Les paroles de saints sont
+          données dans leur forme la plus connue en français.</div></details>
+    </div>
+
+    <h2 id="couleurs" style="margin-top:56px">Les couleurs liturgiques</h2>
+    <div class="accordeon">
+      <details open><summary>Pourquoi ces six couleurs, et pas d'autres ?</summary>
+        <div class="corps">Ce sont celles de la liturgie : <b>violet</b> pour l'Avent et le Carême,
+          <b>blanc et or</b> pour Noël, Pâques et les fêtes, <b>vert</b> pour le temps ordinaire,
+          <b>rouge</b> pour la Pentecôte, les Rameaux et les martyrs, <b>rose</b> pour les dimanches de
+          Gaudete et de Lætare, <b>bleu</b> pour les fêtes de la Vierge. Nous ne proposons rien d'autre :
+          la penderie suit le calendrier de l'Église.</div></details>
+      <details><summary>Quelle est la couleur du temps aujourd'hui ?</summary>
+        <div class="corps" id="temps-du-jour"></div></details>
+      <details><summary>Le t-shirt du Pain de Vie change-t-il de couleur ?</summary>
+        <div class="corps">Il vous est proposé d'emblée dans la couleur du temps liturgique en cours.
+          Vous restez libre d'en choisir une autre avant de commander : les six teintes sont disponibles
+          toute l'année.</div></details>
+      <details><summary>Le bleu est-il une couleur liturgique ?</summary>
+        <div class="corps">Pas au sens strict du missel romain, qui retient le blanc pour les fêtes mariales.
+          Mais le privilège du bleu pour l'Immaculée Conception est ancien et toujours vivant en Espagne et
+          en Amérique latine, et il reste la couleur que tout le monde associe à la Vierge. Nous l'avons gardé
+          pour cela.</div></details>
+    </div>
+
+    <h2 id="tailles" style="margin-top:56px">Guide des tailles</h2>
+    <p>Nos t-shirts sont unisexes, de coupe droite. Ils taillent normalement : prenez votre taille habituelle.
+      Pour un porté plus ample, prenez une taille au-dessus. Mesures du vêtement à plat, en centimètres.</p>
+    <div class="enveloppe-tableau">
+      <table class="tableau">
+        <thead><tr><th>Taille</th><th>Largeur poitrine</th><th>Longueur dos</th><th>Correspond à</th></tr></thead>
+        <tbody>
+          <tr><td>S</td><td>46 cm</td><td>69 cm</td><td>36 / 38</td></tr>
+          <tr><td>M</td><td>51 cm</td><td>72 cm</td><td>40 / 42</td></tr>
+          <tr><td>L</td><td>56 cm</td><td>74 cm</td><td>44 / 46</td></tr>
+          <tr><td>XL</td><td>61 cm</td><td>76 cm</td><td>48 / 50</td></tr>
+          <tr><td>2XL</td><td>66 cm</td><td>78 cm</td><td>52 / 54</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="aide">Astuce : mesurez un t-shirt que vous aimez porter, à plat, d'une couture d'aisselle à l'autre.
+      Comparez ce chiffre à la colonne « largeur poitrine ».</p>
+
+    <h2 id="livraison" style="margin-top:56px">Livraison &amp; retours</h2>
+    <div class="accordeon">
+      <details open><summary>Quels sont les délais ?</summary>
+        <div class="corps">Préparation de la commande sous 48 heures, puis <span id="delai"></span> de transport.
+          Vous recevez un numéro de suivi le jour du départ du colis.</div></details>
+      <details><summary>Combien coûte la livraison ?</summary>
+        <div class="corps" id="frais"></div></details>
+      <details><summary>Livrez-vous à l'étranger ?</summary>
+        <div class="corps" id="zones"></div></details>
+      <details><summary>Puis-je retourner un article ?</summary>
+        <div class="corps">Oui, pendant 14 jours après réception, si l'article n'a pas été porté ni lavé et qu'il est
+          dans son emballage d'origine. Les t-shirts Pain de Vie et les pièces personnalisées, composés d'après
+          votre parole, ne sont pas repris, sauf défaut de notre part, bien entendu.</div></details>
+      <details><summary>Mon colis n'est pas arrivé, que faire ?</summary>
+        <div class="corps">Écrivez-nous avec votre numéro de commande. Nous ouvrons une enquête auprès du
+          transporteur et, si le colis est perdu, nous le refaisons à nos frais.</div></details>
+    </div>
+
+    <h2 id="entretien" style="margin-top:56px">Entretien &amp; fabrication</h2>
+    <div class="accordeon">
+      <details><summary>Comment laver un t-shirt imprimé ?</summary>
+        <div class="corps">À 30 °C, retourné sur l'envers, sans adoucissant. Séchage à l'air libre de préférence.
+          Repassage sur l'envers, jamais directement sur l'impression.</div></details>
+      <details><summary>L'impression va-t-elle craquer ?</summary>
+        <div class="corps">Non. Nous utilisons une impression numérique à encres à l'eau : l'encre pénètre la fibre au
+          lieu de former une couche plastique sur le tissu. Le toucher reste souple et le texte ne se fendille pas.</div></details>
+      <details><summary>Comment entretenir un bandana ?</summary>
+        <div class="corps">Lavage à 30 °C avec des couleurs semblables, repassage doux sur l'envers. Le bord roulotté
+          se remet en place à la main après le lavage : il ne s'effiloche pas.</div></details>
+      <details><summary>Les chapelets sont-ils bénis ?</summary>
+        <div class="corps">Ils ne le sont pas au départ de chez nous : une bénédiction est un acte du prêtre.
+          Présentez-le à votre curé après une messe, il le fera volontiers en quelques instants.</div></details>
+    </div>
+
+    <h2 id="commande" style="margin-top:56px">Commande &amp; paiement</h2>
+    <div class="accordeon">
+      <details><summary>Comment se déroule le paiement ?</summary>
+        <div class="corps" id="paiement"></div></details>
+      <details><summary>Puis-je commander pour une paroisse ou un groupe ?</summary>
+        <div class="corps">Oui, et avec plaisir. À partir de dix pièces, nous appliquons un tarif de groupe et pouvons
+          ajouter le nom de votre paroisse, de votre pèlerinage ou de votre aumônerie sur le vêtement.
+          <a href="contact.html">Écrivez-nous</a> en précisant les quantités et les tailles.</div></details>
+      <details><summary>Faites-vous des cartes cadeaux ?</summary>
+        <div class="corps">Pas encore, mais nous pouvons envoyer directement le colis à la personne de votre choix,
+          avec un mot manuscrit et sans facture à l'intérieur. Indiquez-le simplement dans la case
+          « Mot sur la carte » du panier.</div></details>
+    </div>
+
+    <p class="centre" style="margin-top:52px"><a class="btn" href="contact.html">Poser une autre question</a></p>
+  </div>
+</section>
+
+<div id="pied-site"></div>
+
+<script src="assets/config.js"></script>
+<script src="assets/liturgie.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/mockup.js"></script>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+  const l = CFG.livraison;
+  Site.$("#delai").textContent = l.delai;
+  Site.$("#zones").textContent = "Nous expédions vers : " + l.zones +
+    ". Pour toute autre destination, écrivez-nous : nous calculons le port au cas par cas.";
+  Site.$("#frais").textContent = l.gratuiteDes
+    ? Site.prix(l.prix) + " en point relais ou à domicile, et la livraison est offerte dès "
+      + Site.prix(l.gratuiteDes) + " d'achat."
+    : Site.prix(l.prix) + " quel que soit le montant de la commande.";
+  const T = LITURGIE.temps();
+  Site.$("#temps-du-jour").innerHTML =
+    "Nous sommes dans le <b>" + T.temps.toLowerCase() + "</b> : la couleur du temps est le <b>"
+    + T.couleur.toLowerCase() + "</b>. " + T.sens
+    + " Elle est rappelée en haut de chaque page, et c'est celle qui vous est proposée par défaut sur le t-shirt du Pain de Vie.";
+  Site.$("#paiement").textContent = CFG.paiementActif
+    ? "Le paiement se fait en ligne par carte bancaire, de façon sécurisée, au moment de la commande."
+    : "Vous remplissez le formulaire du panier, nous vous répondons sous 24 h avec le récapitulatif et le moyen de paiement (virement ou lien sécurisé). Aucun prélèvement n'a lieu avant votre accord.";
+})();
+</script>
+</body>
+</html>

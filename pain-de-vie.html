@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le Pain de Vie, recevez votre parole | Annonce l’Évangile</title>
+<meta name="description" content="Rompez le pain et recevez une parole tirée pour vous : un verset ou une parole de saint, imprimée sur votre t-shirt. Chaque pièce est unique.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Annonce l’Évangile">
+<meta property="og:title" content="Le Pain de Vie, recevez votre parole">
+<meta property="og:description" content="Une parole de l'Écriture est tirée pour vous, et devient l'impression de votre t-shirt. On ne la choisit pas : on la reçoit.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)'%3E%3Cpath d='M8,8 L40,8 L24,24 Z' fill='%23563A76'/%3E%3Cpath d='M40,8 L40,40 L24,24 Z' fill='%238E2431'/%3E%3Cpath d='M8,40 L40,40 L24,24 Z' fill='%232E6B4F'/%3E%3Cpath d='M8,8 L8,40 L24,24 Z' fill='%23EBDDBC'/%3E%3C/g%3E%3Cg stroke='%23B08A3E' stroke-width='4.5' stroke-linecap='round'%3E%3Cline x1='24' y1='12' x2='24' y2='36'/%3E%3Cline x1='14' y1='20' x2='34' y2='20'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div id="entete-site"></div>
+
+<section class="pdv-page">
+  <div class="wrap-etroit centre">
+    <p class="surtitre">Le Pain de Vie</p>
+    <p class="temps-encart" id="temps-encart"></p>
+    <h1 id="titre">Une parole vous attend</h1>
+    <hr class="filet">
+    <p class="chapeau" id="intro">Ne choisissez pas : recevez. Rompez le pain, et la parole qui vous est destinée
+      aujourd'hui apparaîtra, imprimée sur votre t-shirt.</p>
+
+    <!-- ===== l'autel : le pain à rompre ===== -->
+    <div class="autel" id="autel">
+      <div id="pain"></div>
+      <button class="btn btn-or" id="btn-rompre" style="margin-top:34px">Rompre le pain</button>
+      <p class="autel-aide" id="aide">Une seule parole par jour</p>
+    </div>
+
+    <!-- ===== la révélation ===== -->
+    <div class="revelation" id="revelation">
+      <div class="parole-carte">
+        <div class="parole-haut">
+          <div class="parole-visuel" id="visuel"></div>
+          <div class="parole-texte" style="text-align:left">
+            <div class="parole-num" id="num"></div>
+            <p class="parole-citation" id="citation"></p>
+            <div class="parole-ref" id="ref"></div>
+            <p class="parole-mot" id="mot"></p>
+          </div>
+        </div>
+        <div class="parole-bas" style="text-align:left">
+          <div class="options">
+            <div>
+              <span class="option-titre">Couleur du t-shirt : <span id="lib-couleur"></span></span>
+              <div class="pastilles" id="couleurs"></div>
+              <p class="aide" style="margin:10px 0 0" id="note-couleur"></p>
+            </div>
+            <div>
+              <span class="option-titre">Taille</span>
+              <div class="puces" id="tailles"></div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+            <div>
+              <div class="prix" id="prix-tshirt">29 €</div>
+              <div class="aide" style="margin:0">Pièce unique · Livrée en 3 à 6 jours</div>
+            </div>
+            <button class="btn" id="btn-panier">Ajouter au panier</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="parole-actions">
+        <button class="btn btn-petit" id="btn-encore">Recevoir une autre parole</button>
+        <button class="btn btn-petit" id="btn-partage">Partager cette parole</button>
+        <a class="btn btn-petit" href="boutique.html">Voir la boutique</a>
+      </div>
+      <p class="autel-aide" style="text-align:center">Votre parole reste enregistrée sur cet appareil jusqu'à demain.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== explications ===== -->
+<section class="section section-blanc">
+  <div class="wrap">
+    <div class="centre">
+      <p class="surtitre">Comment cela fonctionne</p>
+      <h2>Trois gestes, et rien de plus</h2>
+      <hr class="filet">
+    </div>
+    <div class="grille g3" style="margin-top:44px">
+      <div class="etape">
+        <div class="etape-illu" id="illu-1"></div>
+        <div class="carte-cat">Premier geste</div>
+        <h3>Invoquez le Saint-Esprit, puis rompez le pain</h3>
+        <p>Un instant de silence, un clic.</p>
+      </div>
+      <div class="etape">
+        <div class="etape-illu" id="illu-2"></div>
+        <div class="carte-cat">Deuxième geste</div>
+        <h3>La parole vous est donnée</h3>
+        <p>Méditez-la, puis découvrez votre t-shirt.</p>
+      </div>
+      <div class="etape">
+        <div class="etape-illu" id="illu-3"></div>
+        <div class="carte-cat">Troisième geste</div>
+        <h3>Elle devient votre t-shirt</h3>
+        <p>Portez votre message.</p>
+      </div>
+    </div>
+
+    <div class="verset-bloc" style="margin-top:56px">Allez par toute la terre annoncer l'Évangile aux nations.</div>
+  </div>
+</section>
+
+<section class="section section-creme">
+  <div class="wrap-etroit">
+    <div class="centre">
+      <p class="surtitre">Le vêtement</p>
+      <h2>Un t-shirt qu'on garde</h2>
+      <hr class="filet">
+    </div>
+    <ul class="detail-liste">
+      <li><b>Matière</b><span>100 % coton peigné biologique, 180 g/m². Épais sans être lourd.</span></li>
+      <li><b>Coupe</b><span>Unisexe, droite, col rond côtelé. Taille normalement. En cas d'hésitation, prenez votre taille habituelle.</span></li>
+      <li><b>Impression</b><span>Sérigraphie numérique à encres à l'eau : le texte ne craque pas et ne gratte pas.</span></li>
+      <li><b>Tailles</b><span>S à 2XL. Guide des tailles détaillé dans la <a href="faq.html#tailles">foire aux questions</a>.</span></li>
+      <li><b>Délai</b><span>Préparation sous 48 h, puis 3 à 6 jours ouvrés de livraison.</span></li>
+    </ul>
+  </div>
+</section>
+
+<div id="pied-site"></div>
+
+<script src="assets/config.js"></script>
+<script src="assets/liturgie.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/mockup.js"></script>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+  const CLE = "bdm_pdv", CLE_HIST = "bdm_pdv_hist";
+  const PRODUIT = Site.produitParId("pain-de-vie");
+  const COULEURS = {
+    blanc:"#F6F1E4", violet:"#563A76", vert:"#2E6B4F",
+    rouge:"#8E2431", bleu:"#2A3F66", noir:"#211F1D"
+  };
+
+  /* le t-shirt prend d'emblée la couleur du temps liturgique */
+  const TEMPS = LITURGIE.temps();
+  const COULEUR_DU_TEMPS = COULEURS[TEMPS.cle] ? TEMPS.cle : "blanc";
+
+  let etat = { i:null, couleur:COULEUR_DU_TEMPS, taille:"M" };
+
+  const $ = Site.$;
+  const autel = $("#autel");
+  const revel = $("#revelation");
+
+  $("#pain").innerHTML = MOCK.pain();
+  [1,2,3].forEach(n => { $("#illu-" + n).innerHTML = MOCK.etape(n); });
+
+  /* ---------- mémoire ---------- */
+  const auj = () => new Date().toISOString().slice(0,10);
+  function lire(){ try { return JSON.parse(localStorage.getItem(CLE)); } catch(e){ return null; } }
+  function ecrire(o){ try { localStorage.setItem(CLE, JSON.stringify(o)); } catch(e){} }
+  function hist(){ try { return JSON.parse(localStorage.getItem(CLE_HIST)) || []; } catch(e){ return []; } }
+  function noteHist(i){
+    const h = hist(); h.push(i);
+    try { localStorage.setItem(CLE_HIST, JSON.stringify(h.slice(-14))); } catch(e){}
+  }
+
+  /* ---------- tirage ---------- */
+  function tirer(){
+    const h = hist();
+    let libres = PAROLES.map((_,i)=>i).filter(i => h.indexOf(i) === -1);
+    if(!libres.length) libres = PAROLES.map((_,i)=>i);
+    const i = libres[Math.floor(Math.random()*libres.length)];
+    noteHist(i);
+    return i;
+  }
+
+  function numero(i){
+    const d = new Date();
+    const jour = Math.floor((d - new Date(d.getFullYear(),0,0)) / 86400000);
+    return String((jour*7 + i*13) % 9000 + 1000);
+  }
+
+  const dateFr = () => new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});
+
+  /* ---------- affichage ---------- */
+  function afficher(i, opts){
+    opts = opts || {};
+    etat.i = i;
+    const p = PAROLES[i];
+    if(!opts.gardeCouleur) etat.couleur = COULEUR_DU_TEMPS;
+
+    $("#citation").textContent = "« " + p.t + " »";
+    $("#ref").textContent = p.r;
+    $("#mot").textContent = p.m || "";
+    $("#num").textContent = (opts.partagee ? "Parole partagée" : "Votre parole du " + dateFr())
+                          + " · n° " + numero(i);
+
+    dessinerVisuel();
+    rendreCouleurs();
+    rendreTailles();
+
+    revel.classList.add("on");
+    $("#titre").textContent = opts.partagee ? "Une parole vous a été transmise" : "Votre parole du jour";
+    $("#intro").textContent = opts.partagee
+      ? "Quelqu'un a voulu que vous lisiez celle-ci. Vous pouvez aussi recevoir la vôtre."
+      : "Lisez-la doucement. Elle vous est donnée pour aujourd'hui.";
+    $("#aide").style.display = "none";
+    $("#btn-rompre").style.display = "none";
+    autel.classList.add("rompu");
+    autel.style.minHeight = "0";
+    $("#btn-encore").textContent = opts.partagee ? "Recevoir ma propre parole" : "Recevoir une autre parole";
+  }
+
+  function dessinerVisuel(){
+    const p = PAROLES[etat.i];
+    $("#visuel").innerHTML = MOCK.tshirt({ couleur:etat.couleur, design:"verset", verset:{ t:p.t, r:p.r } });
+  }
+
+  function rendreCouleurs(){
+    $("#couleurs").innerHTML = Object.keys(COULEURS).map(c=>{
+      const lib = Site.libCouleur(c) + (LIBELLES.saisons[c] ? ", " + LIBELLES.saisons[c] : "")
+                + (c === COULEUR_DU_TEMPS ? " (couleur du temps)" : "");
+      return `<button class="past${c===etat.couleur?" on":""}" data-c="${c}"
+        style="background:${COULEURS[c]}" title="${lib}" aria-label="${lib}"></button>`;
+    }).join("");
+    $("#lib-couleur").textContent = Site.libCouleur(etat.couleur);
+    $("#note-couleur").textContent = etat.couleur === COULEUR_DU_TEMPS
+      ? "C'est la couleur du temps liturgique : " + TEMPS.temps.toLowerCase() + "."
+      : (LIBELLES.saisons[etat.couleur] || "");
+    Site.$$("#couleurs .past").forEach(b=>b.addEventListener("click",()=>{
+      etat.couleur = b.dataset.c; rendreCouleurs(); dessinerVisuel();
+    }));
+  }
+
+  function rendreTailles(){
+    $("#tailles").innerHTML = PRODUIT.tailles.map(t=>
+      `<button class="puce${t===etat.taille?" on":""}" data-t="${t}">${t}</button>`).join("");
+    Site.$$("#tailles .puce").forEach(b=>b.addEventListener("click",()=>{
+      etat.taille = b.dataset.t; rendreTailles();
+    }));
+  }
+
+  /* ---------- actions ---------- */
+  function rompre(){
+    autel.classList.add("rompu");
+    $("#btn-rompre").disabled = true;
+    setTimeout(()=>{
+      const i = tirer();
+      ecrire({ date:auj(), i:i });
+      afficher(i);
+      setTimeout(()=>revel.scrollIntoView({behavior:"smooth", block:"center"}), 120);
+    }, 1000);
+  }
+
+  $("#btn-rompre").addEventListener("click", rompre);
+
+  $("#btn-encore").addEventListener("click", ()=>{
+    revel.classList.remove("on");
+    autel.classList.remove("rompu");
+    $("#btn-rompre").disabled = false;
+    setTimeout(()=>{
+      const i = tirer();
+      ecrire({ date:auj(), i:i });
+      autel.classList.add("rompu");
+      setTimeout(()=>afficher(i), 850);
+    }, 420);
+    history.replaceState({}, "", location.pathname);
+  });
+
+  $("#btn-partage").addEventListener("click", ()=>{
+    const url = location.origin + location.pathname + "?p=" + etat.i;
+    const p = PAROLES[etat.i];
+    const txt = "« " + p.t + " » (" + p.r + ")";
+    if(navigator.share){
+      navigator.share({ title:"Le Pain de Vie", text:txt, url:url }).catch(()=>{});
+    } else if(navigator.clipboard){
+      navigator.clipboard.writeText(txt + "\n" + url)
+        .then(()=>Site.toast("Lien copié, il ne reste qu'à le coller."))
+        .catch(()=>Site.toast(url));
+    } else { Site.toast(url); }
+  });
+
+  $("#btn-panier").addEventListener("click", ()=>{
+    const p = PAROLES[etat.i];
+    Site.Panier.ajouter({
+      id:"pain-de-vie",
+      nom:"T-shirt Pain de Vie",
+      prix:PRODUIT.prix,
+      couleur:etat.couleur,
+      taille:etat.taille,
+      verset:{ t:p.t, r:p.r },
+      cat:"pdv"
+    });
+  });
+
+  $("#prix-tshirt").textContent = Site.prix(PRODUIT.prix);
+
+  /* rappel du temps liturgique en haut de page */
+  $("#temps-encart").innerHTML =
+    `<i class="temps-pastille" style="background:${TEMPS.hex}"></i>
+     ${TEMPS.temps} · votre t-shirt vous est proposé en ${TEMPS.couleur.toLowerCase()}`;
+
+  /* ---------- au chargement ---------- */
+  const q = new URLSearchParams(location.search);
+  const partage = q.get("p");
+  const memo = lire();
+
+  if(partage !== null && PAROLES[+partage]){
+    afficher(+partage, { partagee:true });
+  } else if(memo && memo.date === auj() && PAROLES[memo.i]){
+    afficher(memo.i);
+  }
+})();
+</script>
+</body>
+</html>

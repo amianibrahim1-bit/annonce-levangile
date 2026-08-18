@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La boutique : bandanas, chapelets et t-shirts | Annonce l’Évangile</title>
+<meta name="description" content="Bandanas mariaux en coton, chapelets montés à la main et t-shirts chrétiens en coton biologique. Livraison en France, Belgique, Suisse et Canada.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)'%3E%3Cpath d='M8,8 L40,8 L24,24 Z' fill='%23563A76'/%3E%3Cpath d='M40,8 L40,40 L24,24 Z' fill='%238E2431'/%3E%3Cpath d='M8,40 L40,40 L24,24 Z' fill='%232E6B4F'/%3E%3Cpath d='M8,8 L8,40 L24,24 Z' fill='%23EBDDBC'/%3E%3C/g%3E%3Cg stroke='%23B08A3E' stroke-width='4.5' stroke-linecap='round'%3E%3Cline x1='24' y1='12' x2='24' y2='36'/%3E%3Cline x1='14' y1='20' x2='34' y2='20'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div id="entete-site"></div>
+
+<section class="entete-page">
+  <div class="wrap-etroit">
+    <p class="fil"><a href="index.html">Accueil</a> · <span id="fil-cat">La boutique</span></p>
+    <h1 id="titre-page">La boutique</h1>
+    <p class="chapeau" style="margin:0 auto" id="intro-page">Fabriqué en petite quantité, vérifié et emballé à la main.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="filtres" id="filtres"></div>
+</div>
+
+<section class="section" style="padding-top:36px">
+  <div class="wrap">
+    <div class="grille g3" id="grille"></div>
+    <p class="centre aide" id="compte" style="margin-top:34px"></p>
+  </div>
+</section>
+
+<section class="section section-creme">
+  <div class="wrap-etroit centre">
+    <p class="surtitre">Vous hésitez ?</p>
+    <h2>Laissez la parole choisir</h2>
+    <hr class="filet">
+    <p class="chapeau" style="margin:0 auto">Le Pain de Vie tire un verset pour vous et l'imprime sur votre t-shirt.
+      Notre pièce la plus offerte.</p>
+    <p style="margin-top:26px"><a class="btn" href="pain-de-vie.html">Recevoir ma parole</a></p>
+  </div>
+</section>
+
+<div id="pied-site"></div>
+
+<script src="assets/config.js"></script>
+<script src="assets/liturgie.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/mockup.js"></script>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+  const CATS = [
+    { id:null, t:"Tout voir" },
+    { id:"pdv", t:"Pain de Vie" },
+    { id:"bandana", t:"Bandanas" },
+    { id:"chapelet", t:"Chapelets" },
+    { id:"tshirt", t:"T-shirts" }
+  ];
+  const TEXTES = {
+    bandana:{ t:"Les bandanas", i:"Coton doux, bord roulotté, 55 × 55 cm." },
+    chapelet:{ t:"Les chapelets", i:"Perles montées une à une, pochette de velours. Le cadeau de communion ou de confirmation." },
+    tshirt:{ t:"Les t-shirts", i:"Coton biologique 180 g/m², dessins sobres imprimés en Europe." },
+    pdv:{ t:"Le Pain de Vie", i:"Une parole tirée pour vous, imprimée sur votre t-shirt. Chaque pièce est unique." }
+  };
+
+  const q = new URLSearchParams(location.search);
+  let courante = q.get("cat");
+  if(!TEXTES[courante]) courante = null;
+
+  function rendre(){
+    const liste = courante ? PRODUITS.filter(p => p.cat === courante) : PRODUITS.slice();
+    Site.$("#grille").innerHTML = liste.map(Site.carteProduit).join("");
+    Site.$("#compte").textContent = liste.length + (liste.length > 1 ? " articles" : " article");
+
+    const T = TEXTES[courante];
+    Site.$("#titre-page").textContent = T ? T.t : "La boutique";
+    Site.$("#intro-page").textContent = T ? T.i :
+      "Fabriqué en petite quantité, vérifié et emballé à la main.";
+    Site.$("#fil-cat").textContent = T ? T.t : "La boutique";
+    document.title = (T ? T.t : "La boutique") + " | Annonce l’Évangile";
+
+    Site.$("#filtres").innerHTML = CATS.map(c=>
+      `<button class="filtre${(c.id||null)===courante?" on":""}" data-c="${c.id||""}">${c.t}</button>`).join("");
+    Site.$$("#filtres .filtre").forEach(b=>b.addEventListener("click",()=>{
+      courante = b.dataset.c || null;
+      const u = courante ? "?cat=" + courante : location.pathname;
+      history.replaceState({}, "", u);
+      rendre();
+      window.scrollTo({ top:0, behavior:"smooth" });
+    }));
+  }
+  rendre();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /panier.html
+Disallow: /mentions.html
+
+Sitemap: https://www.annonce-levangile.fr/sitemap.xml

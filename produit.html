@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Article | Annonce l’Évangile</title>
+<meta name="description" content="Bandanas, chapelets et t-shirts chrétiens, fabriqués en petite quantité et expédiés d'Europe.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)'%3E%3Cpath d='M8,8 L40,8 L24,24 Z' fill='%23563A76'/%3E%3Cpath d='M40,8 L40,40 L24,24 Z' fill='%238E2431'/%3E%3Cpath d='M8,40 L40,40 L24,24 Z' fill='%232E6B4F'/%3E%3Cpath d='M8,8 L8,40 L24,24 Z' fill='%23EBDDBC'/%3E%3C/g%3E%3Cg stroke='%23B08A3E' stroke-width='4.5' stroke-linecap='round'%3E%3Cline x1='24' y1='12' x2='24' y2='36'/%3E%3Cline x1='14' y1='20' x2='34' y2='20'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div id="entete-site"></div>
+
+<div class="wrap">
+  <div class="fiche" id="fiche"></div>
+</div>
+
+<section class="section section-creme" id="bloc-suite">
+  <div class="wrap">
+    <div class="centre">
+      <p class="surtitre">Dans le même esprit</p>
+      <h2>Vous aimerez peut-être</h2>
+      <hr class="filet">
+    </div>
+    <div class="grille g3" style="margin-top:44px" id="suite"></div>
+  </div>
+</section>
+
+<div id="pied-site"></div>
+
+<script src="assets/config.js"></script>
+<script src="assets/liturgie.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/mockup.js"></script>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+  /* les couleurs de la liturgie */
+  const SWATCH = {
+    blanc:"#F6F1E4", violet:"#563A76", rouge:"#8E2431", vert:"#2E6B4F",
+    bleu:"#2A3F66", rose:"#D8A7B4", noir:"#211F1D", nacre:"#EFE7D8", imprime:"#C9BFA8"
+  };
+  const TEMPS = LITURGIE.temps();
+
+  const id = new URLSearchParams(location.search).get("id");
+  const p  = Site.produitParId(id);
+
+  if(!p){ location.replace("boutique.html"); return; }
+  if(p.cat === "pdv"){ location.replace("pain-de-vie.html"); return; }
+
+  document.title = p.nom + " | Annonce l’Évangile";
+  const md = document.querySelector('meta[name="description"]');
+  if(md) md.setAttribute("content", p.resume);
+
+  let couleur = p.couleurs[0];
+  let taille  = p.tailles[0];
+
+  const cat = (LIBELLES.cats[p.cat] || "");
+
+  Site.$("#fiche").innerHTML = `
+    <div class="fiche-visuel">
+      <div id="visuel"></div>
+      <div class="vignettes" id="vignettes"></div>
+    </div>
+    <div>
+      <p class="fil"><a href="index.html">Accueil</a> · <a href="boutique.html?cat=${p.cat}">${cat}</a> · ${p.nom}</p>
+      <h1>${p.nom}</h1>
+      <div class="fiche-prix">${Site.prix(p.prix)}</div>
+      <p class="fiche-desc">${p.desc}</p>
+
+      <div class="options" style="margin-top:26px">
+        <div id="bloc-couleurs">
+          <span class="option-titre">Couleur : <span id="lib-couleur"></span></span>
+          <div class="pastilles" id="couleurs"></div>
+          <p class="aide" style="margin:10px 0 0" id="note-couleur"></p>
+        </div>
+        <div id="bloc-tailles">
+          <span class="option-titre">${p.cat === "tshirt" ? "Taille" : "Format"}</span>
+          <div class="puces" id="tailles"></div>
+        </div>
+      </div>
+
+      <button class="btn btn-large" id="btn-panier" style="margin-top:8px">Ajouter au panier · ${Site.prix(p.prix)}</button>
+      <p class="aide centre" style="margin-top:12px">Livraison offerte dès ${Site.prix(CFG.livraison.gratuiteDes)} · Expédié sous 48 h</p>
+
+      <ul class="detail-liste">
+        ${p.details.map(d=>`<li><b>${d[0]}</b><span>${d[1]}</span></li>`).join("")}
+      </ul>
+
+      <div class="accordeon">
+        <details open>
+          <summary>Livraison &amp; retours</summary>
+          <div class="corps">Expédition depuis l'Europe en ${CFG.livraison.delai}, suivi inclus.
+            Livraison offerte dès ${Site.prix(CFG.livraison.gratuiteDes)} d'achat, sinon ${Site.prix(CFG.livraison.prix)}.
+            Retour accepté pendant 14 jours si l'article n'a pas été porté, sauf pièces personnalisées
+            (t-shirts Pain de Vie), composées d’après votre parole.</div>
+        </details>
+        <details>
+          <summary>Entretien</summary>
+          <div class="corps">Lavage à 30° sur l'envers, sans adoucissant, séchage à l'air libre.
+            Les chapelets se rangent dans leur pochette : le velours protège les perles et la chaîne.</div>
+        </details>
+        <details>
+          <summary>Pour offrir</summary>
+          <div class="corps">Chaque commande part dans un papier de soie fermé d'un cachet, avec une petite carte.
+            Vous pouvez nous indiquer le mot à écrire dessus au moment de la commande, nous l'écrivons à la main.</div>
+        </details>
+      </div>
+    </div>`;
+
+  function dessiner(){
+    Site.$("#visuel").innerHTML = MOCK.produit(p, couleur);
+    Site.$("#lib-couleur").textContent = Site.libCouleur(couleur);
+    const saison = LIBELLES.saisons[couleur] || "";
+    Site.$("#note-couleur").textContent = couleur === TEMPS.cle
+      ? saison + ", c'est la couleur du temps en ce moment (" + TEMPS.temps.toLowerCase() + ")."
+      : saison;
+    Site.$("#vignettes").innerHTML = p.couleurs.map(c=>
+      `<button class="vignette${c===couleur?" on":""}" data-c="${c}" title="${Site.libCouleur(c)}"
+        aria-label="${Site.libCouleur(c)}">${MOCK.produit(p, c)}</button>`).join("");
+    Site.$$("#vignettes .vignette").forEach(b=>b.addEventListener("click",()=>{
+      couleur = b.dataset.c; dessiner(); rendreCouleurs();
+    }));
+  }
+
+  function rendreCouleurs(){
+    Site.$("#couleurs").innerHTML = p.couleurs.map(c=>{
+      const lib = Site.libCouleur(c) + (LIBELLES.saisons[c] ? ", " + LIBELLES.saisons[c] : "");
+      return `<button class="past${c===couleur?" on":""}" data-c="${c}" style="background:${SWATCH[c]||"#ccc"}"
+        title="${lib}" aria-label="${lib}"></button>`;
+    }).join("");
+    Site.$$("#couleurs .past").forEach(b=>b.addEventListener("click",()=>{
+      couleur = b.dataset.c; dessiner(); rendreCouleurs();
+    }));
+  }
+
+  function rendreTailles(){
+    Site.$("#tailles").innerHTML = p.tailles.map(t=>
+      `<button class="puce${t===taille?" on":""}" data-t="${t}">${t}</button>`).join("");
+    Site.$$("#tailles .puce").forEach(b=>b.addEventListener("click",()=>{
+      taille = b.dataset.t; rendreTailles();
+    }));
+  }
+
+  dessiner(); rendreCouleurs(); rendreTailles();
+  if(p.tailles.length < 2)  Site.$("#bloc-tailles").style.display = "none";
+  if(p.couleurs.length < 2){
+    Site.$("#bloc-couleurs").style.display = "none";
+    Site.$("#vignettes").style.display = "none";
+  }
+
+  Site.$("#btn-panier").addEventListener("click", ()=>{
+    Site.Panier.ajouter({ id:p.id, nom:p.nom, prix:p.prix, couleur:couleur, taille:taille, cat:p.cat });
+  });
+
+  /* suggestions */
+  const suite = PRODUITS.filter(x => x.id !== p.id)
+    .sort((a,b)=>(a.cat===p.cat?-1:0)-(b.cat===p.cat?-1:0))
+    .slice(0,3);
+  Site.$("#suite").innerHTML = suite.map(Site.carteProduit).join("");
+})();
+</script>
+</body>
+</html>

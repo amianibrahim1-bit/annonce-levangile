@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nous écrire | Annonce l’Évangile</title>
+<meta name="description" content="Une question sur une commande, une taille ou une commande de groupe ? Écrivez-nous, nous répondons sous 24 heures.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)'%3E%3Cpath d='M8,8 L40,8 L24,24 Z' fill='%23563A76'/%3E%3Cpath d='M40,8 L40,40 L24,24 Z' fill='%238E2431'/%3E%3Cpath d='M8,40 L40,40 L24,24 Z' fill='%232E6B4F'/%3E%3Cpath d='M8,8 L8,40 L24,24 Z' fill='%23EBDDBC'/%3E%3C/g%3E%3Cg stroke='%23B08A3E' stroke-width='4.5' stroke-linecap='round'%3E%3Cline x1='24' y1='12' x2='24' y2='36'/%3E%3Cline x1='14' y1='20' x2='34' y2='20'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div id="entete-site"></div>
+
+<section class="entete-page">
+  <div class="wrap-etroit">
+    <p class="fil"><a href="index.html">Accueil</a> · Contact</p>
+    <p class="surtitre">Nous écrire</p>
+    <h1>Une question ? Une commande de groupe ?</h1>
+    <p class="chapeau" style="margin:0 auto">Nous lisons tout, et nous répondons nous-mêmes, sous 24 heures ouvrées.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="grille g2" style="align-items:start;gap:52px">
+      <div>
+        <h2 class="mt0">Écrivez-nous</h2>
+        <form id="form-contact">
+          <div class="duo">
+            <div class="champ"><label for="nom">Votre nom</label><input id="nom" required></div>
+            <div class="champ"><label for="email">Votre e-mail</label><input id="email" type="email" required></div>
+          </div>
+          <div class="champ"><label for="sujet">Sujet</label>
+            <select id="sujet">
+              <option>Une question sur un article</option>
+              <option>Une commande en cours</option>
+              <option>Un verset ou une traduction particulière</option>
+              <option>Une commande pour une paroisse ou un groupe</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="champ"><label for="message">Votre message</label><textarea id="message" required></textarea></div>
+          <button class="btn btn-large" type="submit">Envoyer le message</button>
+          <p class="aide centre">Votre logiciel de messagerie s'ouvrira avec le message prêt à partir.</p>
+        </form>
+      </div>
+
+      <aside>
+        <div class="encadre" style="margin-top:0">
+          <h3 style="margin-top:0">Nos coordonnées</h3>
+          <p id="coordonnees"></p>
+        </div>
+        <div class="encadre">
+          <h3 style="margin-top:0">Commandes de groupe</h3>
+          <p>Paroisse, aumônerie, pèlerinage, camp d'été : à partir de dix pièces, nous appliquons un tarif de groupe
+            et pouvons ajouter votre nom ou votre blason sur le vêtement. Donnez-nous les quantités, les tailles
+            et la date à laquelle vous en avez besoin.</p>
+        </div>
+        <div class="encadre">
+          <h3 style="margin-top:0">Avant d'écrire</h3>
+          <p>Les questions de <a href="faq.html#tailles">tailles</a>, de
+            <a href="faq.html#livraison">délais</a> et de <a href="faq.html#entretien">lavage</a>
+            ont déjà leur réponse dans la foire aux questions. Vous y gagnerez peut-être une journée.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<div id="pied-site"></div>
+
+<script src="assets/config.js"></script>
+<script src="assets/liturgie.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/mockup.js"></script>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+  const c = [];
+  if(CFG.email) c.push(`<b>E-mail</b><br><a href="mailto:${CFG.email}">${CFG.email}</a>`);
+  if(CFG.telephone) c.push(`<b>Téléphone</b><br>${CFG.telephone}`);
+  if(CFG.whatsapp) c.push(`<b>WhatsApp</b><br><a href="https://wa.me/${CFG.whatsapp}" target="_blank" rel="noopener">Nous écrire sur WhatsApp</a>`);
+  c.push(`<b>Réponse</b><br>Sous 24 heures ouvrées, du lundi au samedi.`);
+  Site.$("#coordonnees").innerHTML = c.join("<br><br>");
+
+  Site.$("#form-contact").onsubmit = function(e){
+    e.preventDefault();
+    const v = id => Site.$("#"+id).value.trim();
+    const corps = `${v("message")}\n\n${v("nom")}\n${v("email")}`;
+    window.location.href = "mailto:" + (CFG.email||"") +
+      "?subject=" + encodeURIComponent(v("sujet") + " : " + v("nom")) +
+      "&body=" + encodeURIComponent(corps);
+    Site.toast("Votre message est prêt dans votre messagerie.");
+    return false;
+  };
+})();
+</script>
+</body>
+</html>
