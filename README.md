@@ -155,11 +155,17 @@ L'ancien système de dessins vectoriels (`design:"ave"`, `"coeur"`, `"alpha"`…
 
 Le vêtement est une **vraie photo**. Trois gabarits sont utilisés, dans `assets/img/` :
 
-| Fichier | Ce que c'est |
-|---|---|
-| `tee-blanc.jpg` | t-shirt blanc à plat |
-| `tee-rouge.jpg` | t-shirt rouge à plat |
-| `tee-porte.jpg` | t-shirt blanc porté |
+| Fichier | Ce que c'est | Calage |
+|---|---|---|
+| `tee-blanc.jpg` | t-shirt blanc à plat | prise de vue 1 |
+| `tee-rouge.jpg` | t-shirt rouge à plat | prise de vue 1 |
+| `tee-porte.jpg` | t-shirt blanc porté | prise de vue 2 |
+| `tee-violet.jpg` | t-shirt violet à plat | prise de vue 3 |
+| `tee-vert.jpg` | t-shirt vert à plat | prise de vue 3 |
+| `tee-bleu.jpg` | t-shirt bleu à plat | prise de vue 3 |
+
+Les gabarits d'une même prise de vue partagent le même calage. Le blanc et le rouge viennent d'une
+série, les trois teintes liturgiques d'une autre : leurs réglages diffèrent, c'est normal.
 
 La parole tirée au sort, ou l'illustration de l'article, est posée dessus par le site, à l'endroit
 et à la taille de la vraie impression. Le réglage se trouve en haut de `assets/mockup.js`, dans

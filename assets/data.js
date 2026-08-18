@@ -106,7 +106,7 @@ window.PRODUITS = [
     resume:"Votre parole, imprimée rien que pour vous.",
     desc:"Le t-shirt du <strong>Pain de Vie</strong> : vous recevez une parole tirée au sort, un verset ou une parole de saint, et elle devient l'impression de votre t-shirt. Chaque pièce est unique. Personne ne portera exactement le vôtre.",
     mockup:{ type:"tshirt", design:"verset" },
-    couleurs:["blanc","rouge"],
+    couleurs:["blanc","violet","vert","rouge","bleu"],
     tailles:["S","M","L","XL","2XL"],
     details:[
       ["Matière","100 % coton peigné bio, 180 g/m²"],

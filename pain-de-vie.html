@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=202608190012">
+<link rel="stylesheet" href="assets/style.css?v=202608190024">
 </head>
 <body>
 
@@ -135,21 +135,23 @@
 
 <div id="pied-site"></div>
 
-<script src="assets/config.js?v=202608190012"></script>
-<script src="assets/liturgie.js?v=202608190012"></script>
-<script src="assets/data.js?v=202608190012"></script>
-<script src="assets/mockup.js?v=202608190012"></script>
-<script src="assets/site.js?v=202608190012"></script>
+<script src="assets/config.js?v=202608190024"></script>
+<script src="assets/liturgie.js?v=202608190024"></script>
+<script src="assets/data.js?v=202608190024"></script>
+<script src="assets/mockup.js?v=202608190024"></script>
+<script src="assets/site.js?v=202608190024"></script>
 <script>
 (function(){
   const CLE = "bdm_pdv", CLE_HIST = "bdm_pdv_hist";
   const PRODUIT = Site.produitParId("pain-de-vie");
-  const COULEURS = { blanc:"#F2EFE7", rouge:"#B3181F" };
+  const COULEURS = { blanc:"#F1F0F2", violet:"#45276B", vert:"#0C853D",
+                     rouge:"#B01C22", bleu:"#2CBAC6" };
 
-  /* le rouge est la couleur des temps de feu : Pentecôte, Rameaux, martyrs.
-     Les autres jours, le t-shirt est proposé en blanc. */
+  /* le t-shirt est proposé dans la couleur du temps liturgique.
+     Le rose des dimanches de Gaudete et de Lætare n'existe pas en tissu :
+     ces jours-là, c'est le blanc. */
   const TEMPS = LITURGIE.temps();
-  const COULEUR_DU_TEMPS = TEMPS.cle === "rouge" ? "rouge" : "blanc";
+  const COULEUR_DU_TEMPS = COULEURS[TEMPS.cle] ? TEMPS.cle : "blanc";
 
   let etat = { i:null, couleur:COULEUR_DU_TEMPS, taille:"M", vue:"plat" };
 
@@ -244,9 +246,9 @@
         style="background:${COULEURS[c]}" title="${lib}" aria-label="${lib}"></button>`;
     }).join("");
     $("#lib-couleur").textContent = Site.libCouleur(etat.couleur);
-    $("#note-couleur").textContent = etat.couleur === "rouge"
-      ? "Le rouge de la Pentecôte, des Rameaux et des martyrs."
-      : "Le blanc des fêtes, portable toute l'année.";
+    $("#note-couleur").textContent = etat.couleur === COULEUR_DU_TEMPS
+      ? (LIBELLES.saisons[etat.couleur] || "") + ", la couleur du temps en ce moment."
+      : (LIBELLES.saisons[etat.couleur] || "");
     Site.$$("#couleurs .past").forEach(b=>b.addEventListener("click",()=>{
       etat.couleur = b.dataset.c;
       if(etat.couleur !== "blanc") etat.vue = "plat";
@@ -320,7 +322,7 @@
   /* rappel du temps liturgique en haut de page */
   $("#temps-encart").innerHTML =
     `<i class="temps-pastille" style="background:${TEMPS.hex}"></i>
-     ${TEMPS.temps} · t-shirt proposé en ${COULEUR_DU_TEMPS}`;
+     ${TEMPS.temps} · t-shirt proposé en ${Site.libCouleur(COULEUR_DU_TEMPS).toLowerCase()}`;
 
   /* ---------- au chargement ---------- */
   const q = new URLSearchParams(location.search);

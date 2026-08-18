@@ -165,7 +165,14 @@
     "rouge" : { img:"assets/img/tee-rouge.jpg", cx:0.5000, cy:0.4597, ech:0.001150,
                 pal:{ encre:"#F7F3EA", or:"#E7C98F" }, fusion:"normal", nom:"Rouge" },
     "porte" : { img:"assets/img/tee-porte.jpg", cx:0.5046, cy:0.5090, ech:0.001020,
-                pal:{ encre:"#2A2420", or:"#A9822F" }, fusion:"multiply", nom:"Porté" }
+                pal:{ encre:"#2A2420", or:"#A9822F" }, fusion:"multiply", nom:"Porté" },
+    /* les trois teintes liturgiques : même prise de vue, donc même calage */
+    "violet": { img:"assets/img/tee-violet.jpg", cx:0.5005, cy:0.4302, ech:0.001287,
+                pal:{ encre:"#F7F3EA", or:"#E7C98F" }, fusion:"normal", nom:"Violet" },
+    "vert"  : { img:"assets/img/tee-vert.jpg",   cx:0.5005, cy:0.4302, ech:0.001287,
+                pal:{ encre:"#F7F3EA", or:"#E7C98F" }, fusion:"normal", nom:"Vert" },
+    "bleu"  : { img:"assets/img/tee-bleu.jpg",   cx:0.5005, cy:0.4302, ech:0.001287,
+                pal:{ encre:"#F7F3EA", or:"#E7C98F" }, fusion:"normal", nom:"Bleu" }
   };
   const COTE = 2048;   /* les gabarits sont carrés */
 
