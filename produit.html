@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=202608190012">
 </head>
 <body>
 
@@ -32,18 +32,19 @@
 
 <div id="pied-site"></div>
 
-<script src="assets/config.js"></script>
-<script src="assets/liturgie.js"></script>
-<script src="assets/data.js"></script>
-<script src="assets/mockup.js"></script>
-<script src="assets/site.js"></script>
+<script src="assets/config.js?v=202608190012"></script>
+<script src="assets/liturgie.js?v=202608190012"></script>
+<script src="assets/data.js?v=202608190012"></script>
+<script src="assets/mockup.js?v=202608190012"></script>
+<script src="assets/site.js?v=202608190012"></script>
 <script>
 (function(){
   /* les couleurs de la liturgie */
   const SWATCH = {
-    blanc:"#F6F1E4", violet:"#563A76", rouge:"#8E2431", vert:"#2E6B4F",
+    blanc:"#F2EFE7", violet:"#563A76", rouge:"#B3181F", vert:"#2E6B4F",
     bleu:"#2A3F66", rose:"#D8A7B4", noir:"#211F1D", nacre:"#EFE7D8", imprime:"#C9BFA8"
   };
+  let vue = "plat";   /* à plat ou porté */
   const TEMPS = LITURGIE.temps();
 
   const id = new URLSearchParams(location.search).get("id");
@@ -64,6 +65,7 @@
   Site.$("#fiche").innerHTML = `
     <div class="fiche-visuel">
       <div id="visuel"></div>
+      <div class="puces centre" id="vues" style="justify-content:center;margin-top:14px"></div>
       <div class="vignettes" id="vignettes"></div>
     </div>
     <div>
@@ -113,7 +115,11 @@
     </div>`;
 
   function dessiner(){
-    Site.$("#visuel").innerHTML = MOCK.produit(p, couleur);
+    Site.$("#visuel").innerHTML = (p.cat === "tshirt" || p.cat === "pdv")
+      ? MOCK.tshirt({ couleur:couleur, vue:(vue === "porte" ? "porte" : null),
+                      image:p.mockup.image, design:p.mockup.design,
+                      verset:{ t:"Je suis le pain de vie.", r:"Jean 6, 35" } })
+      : MOCK.produit(p, couleur);
     Site.$("#lib-couleur").textContent = Site.libCouleur(couleur);
     const saison = LIBELLES.saisons[couleur] || "";
     Site.$("#note-couleur").textContent = couleur === TEMPS.cle
@@ -134,7 +140,9 @@
         title="${lib}" aria-label="${lib}"></button>`;
     }).join("");
     Site.$$("#couleurs .past").forEach(b=>b.addEventListener("click",()=>{
-      couleur = b.dataset.c; dessiner(); rendreCouleurs();
+      couleur = b.dataset.c;
+      if(couleur !== "blanc") vue = "plat";
+      dessiner(); rendreCouleurs(); rendreVues();
     }));
   }
 
@@ -146,7 +154,18 @@
     }));
   }
 
-  dessiner(); rendreCouleurs(); rendreTailles();
+  function rendreVues(){
+    const boite = Site.$("#vues");
+    if(p.cat !== "tshirt" && p.cat !== "pdv"){ boite.style.display = "none"; return; }
+    const dispo = couleur === "blanc" ? [["plat","À plat"],["porte","Porté"]] : [["plat","À plat"]];
+    boite.innerHTML = dispo.map(([v,t])=>
+      `<button class="puce${v===vue?" on":""}" data-v="${v}">${t}</button>`).join("");
+    Site.$$("#vues .puce").forEach(b=>b.addEventListener("click",()=>{
+      vue = b.dataset.v; rendreVues(); dessiner();
+    }));
+  }
+
+  dessiner(); rendreCouleurs(); rendreTailles(); rendreVues();
   if(p.tailles.length < 2)  Site.$("#bloc-tailles").style.display = "none";
   if(p.couleurs.length < 2){
     Site.$("#bloc-couleurs").style.display = "none";

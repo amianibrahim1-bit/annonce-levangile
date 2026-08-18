@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=202608190012">
 </head>
 <body>
 
@@ -40,7 +40,10 @@
     <div class="revelation" id="revelation">
       <div class="parole-carte">
         <div class="parole-haut">
-          <div class="parole-visuel" id="visuel"></div>
+          <div class="parole-visuel">
+            <div id="visuel"></div>
+            <div class="puces" id="vues" style="justify-content:center;margin-top:12px"></div>
+          </div>
           <div class="parole-texte" style="text-align:left">
             <div class="parole-num" id="num"></div>
             <p class="parole-citation" id="citation"></p>
@@ -132,25 +135,23 @@
 
 <div id="pied-site"></div>
 
-<script src="assets/config.js"></script>
-<script src="assets/liturgie.js"></script>
-<script src="assets/data.js"></script>
-<script src="assets/mockup.js"></script>
-<script src="assets/site.js"></script>
+<script src="assets/config.js?v=202608190012"></script>
+<script src="assets/liturgie.js?v=202608190012"></script>
+<script src="assets/data.js?v=202608190012"></script>
+<script src="assets/mockup.js?v=202608190012"></script>
+<script src="assets/site.js?v=202608190012"></script>
 <script>
 (function(){
   const CLE = "bdm_pdv", CLE_HIST = "bdm_pdv_hist";
   const PRODUIT = Site.produitParId("pain-de-vie");
-  const COULEURS = {
-    blanc:"#F6F1E4", violet:"#563A76", vert:"#2E6B4F",
-    rouge:"#8E2431", bleu:"#2A3F66", noir:"#211F1D"
-  };
+  const COULEURS = { blanc:"#F2EFE7", rouge:"#B3181F" };
 
-  /* le t-shirt prend d'emblée la couleur du temps liturgique */
+  /* le rouge est la couleur des temps de feu : Pentecôte, Rameaux, martyrs.
+     Les autres jours, le t-shirt est proposé en blanc. */
   const TEMPS = LITURGIE.temps();
-  const COULEUR_DU_TEMPS = COULEURS[TEMPS.cle] ? TEMPS.cle : "blanc";
+  const COULEUR_DU_TEMPS = TEMPS.cle === "rouge" ? "rouge" : "blanc";
 
-  let etat = { i:null, couleur:COULEUR_DU_TEMPS, taille:"M" };
+  let etat = { i:null, couleur:COULEUR_DU_TEMPS, taille:"M", vue:"plat" };
 
   const $ = Site.$;
   const autel = $("#autel");
@@ -218,22 +219,38 @@
 
   function dessinerVisuel(){
     const p = PAROLES[etat.i];
-    $("#visuel").innerHTML = MOCK.tshirt({ couleur:etat.couleur, design:"verset", verset:{ t:p.t, r:p.r } });
+    $("#visuel").innerHTML = MOCK.tshirt({
+      couleur:etat.couleur,
+      vue: etat.vue === "porte" ? "porte" : null,
+      design:"verset", verset:{ t:p.t, r:p.r }
+    });
+    rendreVues();
+  }
+
+  function rendreVues(){
+    /* la photo portée n'existe qu'en blanc */
+    const dispo = etat.couleur === "blanc" ? [["plat","À plat"],["porte","Porté"]] : [["plat","À plat"]];
+    $("#vues").innerHTML = dispo.map(([v,t])=>
+      `<button class="puce${v===etat.vue?" on":""}" data-v="${v}">${t}</button>`).join("");
+    Site.$$("#vues .puce").forEach(b=>b.addEventListener("click",()=>{
+      etat.vue = b.dataset.v; dessinerVisuel();
+    }));
   }
 
   function rendreCouleurs(){
     $("#couleurs").innerHTML = Object.keys(COULEURS).map(c=>{
-      const lib = Site.libCouleur(c) + (LIBELLES.saisons[c] ? ", " + LIBELLES.saisons[c] : "")
-                + (c === COULEUR_DU_TEMPS ? " (couleur du temps)" : "");
+      const lib = Site.libCouleur(c) + (LIBELLES.saisons[c] ? ", " + LIBELLES.saisons[c] : "");
       return `<button class="past${c===etat.couleur?" on":""}" data-c="${c}"
         style="background:${COULEURS[c]}" title="${lib}" aria-label="${lib}"></button>`;
     }).join("");
     $("#lib-couleur").textContent = Site.libCouleur(etat.couleur);
-    $("#note-couleur").textContent = etat.couleur === COULEUR_DU_TEMPS
-      ? "C'est la couleur du temps liturgique : " + TEMPS.temps.toLowerCase() + "."
-      : (LIBELLES.saisons[etat.couleur] || "");
+    $("#note-couleur").textContent = etat.couleur === "rouge"
+      ? "Le rouge de la Pentecôte, des Rameaux et des martyrs."
+      : "Le blanc des fêtes, portable toute l'année.";
     Site.$$("#couleurs .past").forEach(b=>b.addEventListener("click",()=>{
-      etat.couleur = b.dataset.c; rendreCouleurs(); dessinerVisuel();
+      etat.couleur = b.dataset.c;
+      if(etat.couleur !== "blanc") etat.vue = "plat";
+      rendreCouleurs(); dessinerVisuel();
     }));
   }
 
@@ -303,7 +320,7 @@
   /* rappel du temps liturgique en haut de page */
   $("#temps-encart").innerHTML =
     `<i class="temps-pastille" style="background:${TEMPS.hex}"></i>
-     ${TEMPS.temps} · votre t-shirt vous est proposé en ${TEMPS.couleur.toLowerCase()}`;
+     ${TEMPS.temps} · t-shirt proposé en ${COULEUR_DU_TEMPS}`;
 
   /* ---------- au chargement ---------- */
   const q = new URLSearchParams(location.search);

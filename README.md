@@ -153,13 +153,28 @@ L'ancien système de dessins vectoriels (`design:"ave"`, `"coeur"`, `"alpha"`…
 
 ### Le t-shirt lui-même
 
-Le vêtement est dessiné (tombé du tissu, plis, ourlets piqués, col côtelé, ombre portée), pas
-photographié. C'est ce qui permet de le teindre dans n'importe quelle couleur et d'y poser la parole
-tirée au sort, en une fraction de seconde et sans photo à préparer.
+Le vêtement est une **vraie photo**. Trois gabarits sont utilisés, dans `assets/img/` :
 
-**Si vous préférez de vraies photos de t-shirts**, c'est possible : demandez à votre atelier ses
-photos de t-shirts vierges (une par couleur, vue de face, fond uni) et envoyez-les-moi. Le dessin
-peut alors être posé sur la photo au lieu du t-shirt dessiné. Comptez une photo par coloris. C'est ce qui permet d'imprimer la parole tirée sur le t-shirt à
+| Fichier | Ce que c'est |
+|---|---|
+| `tee-blanc.jpg` | t-shirt blanc à plat |
+| `tee-rouge.jpg` | t-shirt rouge à plat |
+| `tee-porte.jpg` | t-shirt blanc porté |
+
+La parole tirée au sort, ou l'illustration de l'article, est posée dessus par le site, à l'endroit
+et à la taille de la vraie impression. Le réglage se trouve en haut de `assets/mockup.js`, dans
+l'objet `GABARITS` :
+
+- `cx`, `cy` : le centre de la zone d'impression, en fraction de la largeur de l'image ;
+- `ech` : l'échelle du dessin, dans la même unité ;
+- `pal` : la couleur de l'encre (sombre sur tissu clair, crème sur tissu foncé) ;
+- `fusion` : `multiply` sur tissu clair pour que l'encre prenne le grain du tissu, `normal` sinon.
+
+**Pour ajouter un coloris**, il faut la photo du t-shirt vierge *et* une photo du même t-shirt avec
+une impression, qui sert à mesurer la zone. Les valeurs actuelles ont été mesurées sur les exemples
+fournis, au pixel près.
+
+La photo portée n'existe qu'en blanc : le bouton « Porté » disparaît quand on choisit le rouge. C'est ce qui permet d'imprimer la parole tirée sur le t-shirt à
 l'écran, tout de suite, sans photo à préparer.
 
 **Le jour où vous aurez de vraies photos** (les visuels fournis par votre atelier, ou vos propres photos) :
@@ -167,6 +182,20 @@ dans `assets/site.js`, la fonction `carteProduit` et, dans `produit.html`, la fo
 sont les deux seuls endroits où le visuel est posé. Remplacez `MOCK.produit(p, couleur)` par
 `<img src="assets/img/…">`. Gardez le dessin pour le t-shirt Pain de Vie : c'est lui qui donne au
 client l'aperçu de *sa* parole.
+
+---
+
+## Après chaque modification des fichiers `assets/`
+
+Les pages appellent les fichiers avec un numéro de version (`assets/site.js?v=202608190009`).
+Si vous modifiez un fichier de `assets/`, changez ce numéro dans toutes les pages, sinon les
+visiteurs qui ont déjà vu le site garderont l'ancienne version en mémoire :
+
+```bash
+cd ~/Documents/"App autres"/bandanas-de-marie
+V=$(date +%Y%m%d%H%M)
+perl -i -pe "s{(assets/(?:style\.css|config\.js|liturgie\.js|data\.js|mockup\.js|site\.js))(\?v=[0-9]+)?\"}{\$1?v=$V\"}g" *.html
+```
 
 ---
 

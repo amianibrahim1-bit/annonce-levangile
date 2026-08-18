@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=202608190012">
 </head>
 <body>
 
@@ -88,8 +88,8 @@
       <p class="surtitre">Notre couleur, celle de l'Église</p>
       <h2>Les couleurs du temps</h2>
       <hr class="filet">
-      <p class="chapeau" style="margin:0 auto 6px">L'Église change de couleur au fil de l'année. Nos vêtements
-        suivent le même calendrier.</p>
+      <p class="chapeau" style="margin:0 auto 6px">L'Église change de couleur au fil de l'année. C'est là que nous
+        prenons les nôtres.</p>
       <p class="badge" id="badge-temps" style="margin:18px 0 0"></p>
     </div>
     <div class="couleurs-grille" style="margin-top:44px" id="couleurs-temps"></div>
@@ -180,21 +180,23 @@
 
 <div id="pied-site"></div>
 
-<script src="assets/config.js"></script>
-<script src="assets/liturgie.js"></script>
-<script src="assets/data.js"></script>
-<script src="assets/mockup.js"></script>
-<script src="assets/site.js"></script>
+<script src="assets/config.js?v=202608190012"></script>
+<script src="assets/liturgie.js?v=202608190012"></script>
+<script src="assets/data.js?v=202608190012"></script>
+<script src="assets/mockup.js?v=202608190012"></script>
+<script src="assets/site.js?v=202608190012"></script>
 <script>
 (function(){
   const T = LITURGIE.temps();
 
   /* visuel du héros : le t-shirt dans la couleur du temps */
   document.getElementById("heros-visuel").innerHTML =
-    MOCK.tshirt({ couleur:T.cle, design:"verset", verset:{ t:"Je suis le pain de vie.", r:"Jean 6, 35" } });
+    MOCK.tshirt({ couleur:(T.cle === "rouge" ? "rouge" : "blanc"), design:"verset",
+                  verset:{ t:"Je suis le pain de vie.", r:"Jean 6, 35" } });
 
   document.getElementById("pdv-visuel").innerHTML =
-    MOCK.tshirt({ couleur:"bleu", design:"verset", verset:{ t:"Ta parole est une lampe à mes pieds, et une lumière sur mon sentier.", r:"Psaume 119, 105" } });
+    MOCK.tshirt({ vue:"porte", design:"verset",
+                  verset:{ t:"Ta parole est une lampe à mes pieds, et une lumière sur mon sentier.", r:"Psaume 119, 105" } });
 
   /* les cinq couleurs de la liturgie */
   const ORDRE = ["violet","blanc","vert","rouge","rose"];

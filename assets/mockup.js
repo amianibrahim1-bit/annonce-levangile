@@ -156,73 +156,48 @@
      1) T-SHIRT
      opts = { couleur, design, verset:{t,r}, vue:"grand"|"vignette" }
      ========================================================= */
+  /* Les gabarits photo. Pour chacun : le centre de la zone d'impression
+     et l'échelle du dessin, exprimés en fraction de la largeur de l'image,
+     mesurés sur les exemples imprimés fournis. */
+  const GABARITS = {
+    "blanc" : { img:"assets/img/tee-blanc.jpg", cx:0.4998, cy:0.4360, ech:0.001150,
+                pal:{ encre:"#2A2420", or:"#A9822F" }, fusion:"multiply", nom:"Blanc" },
+    "rouge" : { img:"assets/img/tee-rouge.jpg", cx:0.5000, cy:0.4597, ech:0.001150,
+                pal:{ encre:"#F7F3EA", or:"#E7C98F" }, fusion:"normal", nom:"Rouge" },
+    "porte" : { img:"assets/img/tee-porte.jpg", cx:0.5046, cy:0.5090, ech:0.001020,
+                pal:{ encre:"#2A2420", or:"#A9822F" }, fusion:"multiply", nom:"Porté" }
+  };
+  const COTE = 2048;   /* les gabarits sont carrés */
+
   function tshirt(opts){
     opts = opts || {};
-    const p  = TISSU[opts.couleur] || TISSU.blanc;
+    const vue = opts.vue === "porte" ? "porte" : null;
+    const cle = vue || (GABARITS[opts.couleur] ? opts.couleur : "blanc");
+    const g   = GABARITS[cle];
     const uid = "t" + Math.random().toString(36).slice(2,8);
-    const sombre = (p.encre === "#2A2420" || p.encre === "#3A322A") ? false : true;
 
-    /* --- silhouette : épaules tombantes, manches ourlées, bas légèrement évasé --- */
-    const corps =
-      "M240,84 C222,87 206,92 192,99 "+
-      "C158,116 124,144 104,174 "+
-      "L80,256 C94,280 122,297 158,304 "+
-      "C170,326 174,368 171,424 "+
-      "C168,486 165,566 167,620 "+
-      "C244,637 356,637 433,620 "+
-      "C435,566 432,486 429,424 "+
-      "C426,368 430,326 442,304 "+
-      "C478,297 506,280 520,256 "+
-      "L496,174 C476,144 442,116 408,99 "+
-      "C394,92 378,87 360,84 "+
-      "C352,116 328,134 300,134 C272,134 248,116 240,84 Z";
-
-    /* --- l'encolure, servant au col et à son ombre --- */
-    const encolure = "M240,84 C248,116 272,134 300,134 C328,134 352,116 360,84";
-
-    let impression = "";
-    const d = opts.design || "verset";
+    /* le dessin à poser : un verset composé, ou une illustration */
+    let dessin = "", bbox = null;
     if(opts.image){
-      impression = `<image href="${esc(opts.image)}"
-          x="160" y="200" width="280" height="310"
-          preserveAspectRatio="xMidYMid meet"
-          filter="url(#${uid}ko)" opacity=".94"/>`;
-    } else if(d === "verset" && opts.verset){
-      impression = imprimeVerset(opts.verset, p);
+      dessin = `<image href="${esc(opts.image)}" x="-95" y="-105" width="190" height="210"
+                  preserveAspectRatio="xMidYMid meet" filter="url(#${uid}ko)"/>`;
     } else {
-      impression = imprimeDesign(d, p);
+      const v = (opts.design === "verset" || !opts.design) && opts.verset
+              ? opts.verset : null;
+      dessin = v ? imprimeVerset(v, g.pal) : imprimeDesign(opts.design, g.pal);
+      bbox = "mesurer";
     }
 
-    return `<svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg" role="img"
-      aria-label="T-shirt ${esc(LIB(opts.couleur))}">
+    const s = g.ech * COTE;
+
+    /* Le groupe est centré sur la zone d'impression. Pour un verset, on
+       recentre d'abord la composition sur son propre milieu (elle est
+       dessinée dans le repère du t-shirt d'origine, autour de 300;336). */
+    const recentre = bbox ? `translate(-300 -336)` : ``;
+
+    return `<svg viewBox="0 0 ${COTE} ${COTE}" xmlns="http://www.w3.org/2000/svg" role="img"
+      aria-label="T-shirt ${esc(g.nom)}">
       <defs>
-        <linearGradient id="${uid}g" x1=".12" y1="0" x2=".92" y2="1">
-          <stop offset="0%"   stop-color="${p.clair}"/>
-          <stop offset="38%"  stop-color="${p.base}"/>
-          <stop offset="100%" stop-color="${p.ombre}"/>
-        </linearGradient>
-        <radialGradient id="${uid}lum" cx="42%" cy="34%" r="46%">
-          <stop offset="0%"   stop-color="#fff" stop-opacity=".30"/>
-          <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
-        </radialGradient>
-        <linearGradient id="${uid}col" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stop-color="${p.ombre}"/>
-          <stop offset="55%" stop-color="${p.base}"/>
-          <stop offset="100%" stop-color="${p.clair}"/>
-        </linearGradient>
-        <linearGradient id="${uid}cot" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"   stop-color="#000" stop-opacity=".16"/>
-          <stop offset="14%"  stop-color="#000" stop-opacity="0"/>
-          <stop offset="86%"  stop-color="#000" stop-opacity="0"/>
-          <stop offset="100%" stop-color="#000" stop-opacity=".18"/>
-        </linearGradient>
-        <clipPath id="${uid}k"><path d="${corps}"/></clipPath>
-        <filter id="${uid}flou" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="9"/>
-        </filter>
-        <filter id="${uid}flou2" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="4"/>
-        </filter>
         <filter id="${uid}ko" x="-2%" y="-2%" width="104%" height="104%"
                 color-interpolation-filters="sRGB">
           <feColorMatrix type="matrix" values="1 0 0 0 0
@@ -230,113 +205,15 @@
                                                0 0 1 0 0
                                                -1.33 -1.33 -1.33 3.62 0"/>
         </filter>
-        <!-- grain du coton -->
-        <filter id="${uid}grain" x="0" y="0" width="100%" height="100%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" result="b"/>
-          <feColorMatrix in="b" type="saturate" values="0"/>
-        </filter>
       </defs>
-
-      <!-- ombre portée au sol -->
-      <ellipse cx="302" cy="648" rx="176" ry="19" fill="#2A2420" opacity=".10" filter="url(#${uid}flou2)"/>
-
-      <path d="${corps}" fill="url(#${uid}g)"/>
-
-      <g clip-path="url(#${uid}k)">
-        <!-- lumière principale et bords assombris -->
-        <rect x="0" y="0" width="600" height="700" fill="url(#${uid}lum)"/>
-        <rect x="0" y="0" width="600" height="700" fill="url(#${uid}cot)"/>
-
-        <!-- creux sous les manches et le long des flancs -->
-        <g fill="${p.ombre}" opacity="${sombre ? ".5" : ".42"}" filter="url(#${uid}flou)">
-          <path d="M158,300 C182,318 190,372 186,430 C182,500 178,570 180,624 L150,628 L150,300 Z"/>
-          <path d="M442,300 C418,318 410,372 414,430 C418,500 422,570 420,624 L450,628 L450,300 Z"/>
-          <path d="M104,176 C120,206 132,246 138,286 L86,292 L80,256 Z"/>
-          <path d="M496,176 C480,206 468,246 462,286 L514,292 L520,256 Z"/>
-        </g>
-
-        <!-- plis du tissu -->
-        <g stroke="${p.ombre}" fill="none" stroke-linecap="round"
-           opacity="${sombre ? ".55" : ".45"}" filter="url(#${uid}flou2)">
-          <path d="M232,150 C222,206 220,268 228,318" stroke-width="7"/>
-          <path d="M368,150 C378,206 380,268 372,318" stroke-width="7"/>
-          <path d="M196,430 C210,486 206,556 196,612" stroke-width="9"/>
-          <path d="M404,430 C390,486 394,556 404,612" stroke-width="9"/>
-          <path d="M300,520 C296,556 292,586 290,616" stroke-width="5" opacity=".6"/>
-          <path d="M262,470 C258,520 256,566 258,610" stroke-width="4" opacity=".45"/>
-          <path d="M340,470 C344,520 346,566 344,610" stroke-width="4" opacity=".45"/>
-        </g>
-        <g stroke="#fff" fill="none" stroke-linecap="round"
-           opacity="${sombre ? ".16" : ".30"}" filter="url(#${uid}flou2)">
-          <path d="M300,190 C296,260 298,340 300,410" stroke-width="16"/>
-          <path d="M214,470 C222,520 220,570 214,608" stroke-width="6"/>
-          <path d="M386,470 C378,520 380,570 386,608" stroke-width="6"/>
-        </g>
-
-        ${impression}
-
-        <!-- la lumière et les plis repassent au-dessus du dessin :
-             l'impression suit le tissu au lieu de flotter dessus -->
-        <g style="mix-blend-mode:multiply" opacity="${sombre ? ".30" : ".22"}"
-           filter="url(#${uid}flou)" fill="${p.ombre}">
-          <path d="M150,300 L186,300 C182,420 180,540 182,628 L150,628 Z"/>
-          <path d="M450,300 L414,300 C418,420 420,540 418,628 L450,628 Z"/>
-        </g>
-        <rect x="0" y="0" width="600" height="700" filter="url(#${uid}grain)"
-              opacity="${sombre ? ".10" : ".07"}" style="mix-blend-mode:multiply"/>
-
-        <!-- ombre de l'ourlet bas -->
-        <path d="M167,600 C244,618 356,618 433,600 L433,640 L167,640 Z"
-              fill="${p.ombre}" opacity=".30" filter="url(#${uid}flou2)"/>
-      </g>
-
-      <!-- ourlets piqués : bas et manches -->
-      <g fill="none" stroke="${p.ombre}" stroke-width="1.6" opacity=".55">
-        <path d="M170,604 C246,621 356,621 430,604"/>
-        <path d="M84,268 C100,288 126,302 158,308"/>
-        <path d="M516,268 C500,288 474,302 442,308"/>
-      </g>
-      <g fill="none" stroke="${p.ombre}" stroke-width="1.2" stroke-dasharray="4 5" opacity=".45">
-        <path d="M170,612 C246,629 356,629 430,612"/>
-        <path d="M88,276 C104,294 128,307 158,313"/>
-        <path d="M512,276 C496,294 472,307 442,313"/>
-      </g>
-
-      <!-- emmanchures -->
-      <g fill="none" stroke="${p.ombre}" stroke-width="1.8" opacity=".5">
-        <path d="M158,304 C176,272 196,250 222,236"/>
-        <path d="M442,304 C424,272 404,250 378,236"/>
-      </g>
-
-      <!-- on voit l'intérieur du dos par l'encolure -->
-      <path d="M240,84 C250,58 350,58 360,84 C352,116 328,134 300,134 C272,134 248,116 240,84 Z"
-            fill="url(#${uid}col)"/>
-      <path d="M240,84 C250,58 350,58 360,84 C352,110 328,126 300,126 C272,126 248,110 240,84 Z"
-            fill="#000" opacity="${sombre ? ".22" : ".14"}" filter="url(#${uid}flou2)"/>
-
-      <!-- col côtelé -->
-      <path d="M240,84 C248,116 272,134 300,134 C328,134 352,116 360,84
-               C352,80 344,77 336,75 C328,101 316,114 300,114 C284,114 272,101 264,75
-               C256,77 248,80 240,84 Z"
-            fill="${p.base}"/>
-      <g stroke="${p.ombre}" stroke-width=".9" opacity=".4" stroke-linecap="round">
-        ${Array.from({length:17},(_,i)=>{
-          const a  = (i+1)*(Math.PI/18);
-          const xe = 300 + Math.cos(a)*60, ye = 84 + Math.sin(a)*50;
-          const xi = 300 + Math.cos(a)*36, yi = 75 + Math.sin(a)*39;
-          return `<line x1="${xi}" y1="${yi}" x2="${xe}" y2="${ye}"/>`;
-        }).join("")}
-      </g>
-      <path d="${encolure}" fill="none" stroke="${p.ombre}" stroke-width="2" opacity=".6"/>
-      <path d="M264,75 C272,101 284,114 300,114 C316,114 328,101 336,75"
-            fill="none" stroke="${p.ombre}" stroke-width="1.6" opacity=".45"/>
-      <!-- creux de l'encolure -->
-      <path d="M264,78 C274,106 286,118 300,118 C314,118 326,106 336,78"
-            fill="${p.ombre}" opacity=".18" filter="url(#${uid}flou2)"/>
-
-      <path d="${corps}" fill="none" stroke="${p.ombre}" stroke-width="1.6" opacity=".85"/>
+      <image href="${g.img}" x="0" y="0" width="${COTE}" height="${COTE}"/>
+      <g transform="translate(${g.cx*COTE} ${g.cy*COTE}) scale(${s}) ${recentre}"
+         style="mix-blend-mode:${g.fusion}">${dessin}</g>
     </svg>`;
   }
+
+  /* nom lisible d'un gabarit */
+  function gabarits(){ return GABARITS; }
 
   /* --- impression d'un verset au centre de la poitrine ---
      Tout est calé sur LARGEUR : le corps du texte diminue jusqu'à ce
@@ -799,6 +676,6 @@
     </svg>`;
   }
 
-  global.MOCK = { tshirt, bandana, chapelet, produit, pain, etape, imprimeVerset, croix, lys, etoile, epi, monogramme };
+  global.MOCK = { tshirt, bandana, chapelet, produit, pain, etape, imprimeVerset, gabarits, croix, lys, etoile, epi, monogramme };
 
 })(window);

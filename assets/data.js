@@ -106,7 +106,7 @@ window.PRODUITS = [
     resume:"Votre parole, imprimée rien que pour vous.",
     desc:"Le t-shirt du <strong>Pain de Vie</strong> : vous recevez une parole tirée au sort, un verset ou une parole de saint, et elle devient l'impression de votre t-shirt. Chaque pièce est unique. Personne ne portera exactement le vôtre.",
     mockup:{ type:"tshirt", design:"verset" },
-    couleurs:["blanc","violet","vert","rouge","bleu","noir"],
+    couleurs:["blanc","rouge"],
     tailles:["S","M","L","XL","2XL"],
     details:[
       ["Matière","100 % coton peigné bio, 180 g/m²"],
@@ -273,7 +273,7 @@ window.PRODUITS = [
     resume:"Trait noir, auréole et cheveux en vert fluo.",
     desc:"La Vierge et l'Enfant tracés d'un trait continu, la chevelure et l'auréole rehaussées de vert fluorescent. Un dessin contemporain qui se remarque sans crier.",
     mockup:{ type:"tshirt", image:"assets/img/tshirt-vierge-neon-vert.jpg" },
-    couleurs:["blanc","rose"],
+    couleurs:["blanc"],
     tailles:["S","M","L","XL","2XL"],
     details:[
       ["Matière","100 % coton peigné bio, 180 g/m²"],
@@ -292,7 +292,7 @@ window.PRODUITS = [
     resume:"Le même dessin, en bleu électrique.",
     desc:"La Vierge et l'Enfant au trait, chevelure et auréole en bleu électrique. Même dessin que la version verte, pour ceux qui préfèrent le bleu de Marie.",
     mockup:{ type:"tshirt", image:"assets/img/tshirt-vierge-neon-bleu.jpg" },
-    couleurs:["blanc","rose"],
+    couleurs:["blanc"],
     tailles:["S","M","L","XL","2XL"],
     details:[
       ["Matière","100 % coton peigné bio, 180 g/m²"],
@@ -311,7 +311,7 @@ window.PRODUITS = [
     resume:"Notre-Dame de Guadalupe en pleines couleurs.",
     desc:"Notre-Dame de Guadalupe dans une mandorle rayonnante, en violet, turquoise, vert et rose. Une image de dévotion traitée comme une affiche.",
     mockup:{ type:"tshirt", image:"assets/img/tshirt-guadalupe-pop.jpg" },
-    couleurs:["blanc","rose"],
+    couleurs:["blanc"],
     tailles:["S","M","L","XL","2XL"],
     details:[
       ["Matière","100 % coton peigné bio, 180 g/m²"],
@@ -330,7 +330,7 @@ window.PRODUITS = [
     resume:"La même, en camaïeu de rose et framboise.",
     desc:"Notre-Dame de Guadalupe en camaïeu de rose et framboise, rayons et mandorle compris. Assorti au bandana du même nom.",
     mockup:{ type:"tshirt", image:"assets/img/tshirt-guadalupe-rose.jpg" },
-    couleurs:["blanc","rose"],
+    couleurs:["blanc"],
     tailles:["S","M","L","XL","2XL"],
     details:[
       ["Matière","100 % coton peigné bio, 180 g/m²"],
@@ -349,7 +349,7 @@ window.PRODUITS = [
     resume:"La Vierge debout, chapelet à la main.",
     desc:"La Vierge debout, les mains jointes et le chapelet entre les doigts, dessinée d'un trait fin. Le plus sobre de la collection.",
     mockup:{ type:"tshirt", image:"assets/img/tshirt-notre-dame-rosaire.jpg" },
-    couleurs:["blanc","rose"],
+    couleurs:["blanc"],
     tailles:["S","M","L","XL","2XL"],
     details:[
       ["Matière","100 % coton peigné bio, 180 g/m²"],
@@ -368,7 +368,7 @@ window.PRODUITS = [
     resume:"Un seul trait, et le chapelet en dessous.",
     desc:"Le visage de la Vierge en prière, tracé d'une ligne continue, et le chapelet qui descend en dessous jusqu'à la croix. Très beau porté seul.",
     mockup:{ type:"tshirt", image:"assets/img/tshirt-vierge-priere.jpg" },
-    couleurs:["blanc","rose"],
+    couleurs:["blanc"],
     tailles:["S","M","L","XL","2XL"],
     details:[
       ["Matière","100 % coton peigné bio, 180 g/m²"],
@@ -387,7 +387,7 @@ window.PRODUITS = [
     resume:"Manteau bleu, voile d'or, l'Enfant endormi.",
     desc:"La Vierge tenant l'Enfant endormi, manteau bleu et voile d'or, deux auréoles dorées. Une illustration douce, à porter tous les jours.",
     mockup:{ type:"tshirt", image:"assets/img/tshirt-vierge-bleu-or.jpg" },
-    couleurs:["blanc","rose"],
+    couleurs:["blanc"],
     tailles:["S","M","L","XL","2XL"],
     details:[
       ["Matière","100 % coton peigné bio, 180 g/m²"],
@@ -406,7 +406,7 @@ window.PRODUITS = [
     resume:"La salutation de saint François, en lettres d'or.",
     desc:"« Paix et Bien », la salutation de saint François d'Assise, calligraphiée en lettres d'or avec la colombe et les nuages. Le cadeau tout trouvé pour un franciscain.",
     mockup:{ type:"tshirt", image:"assets/img/tshirt-paix-et-bien.jpg" },
-    couleurs:["blanc","rose"],
+    couleurs:["blanc"],
     tailles:["S","M","L","XL","2XL"],
     details:[
       ["Matière","100 % coton peigné bio, 180 g/m²"],
@@ -425,7 +425,7 @@ window.PRODUITS = [
     resume:"Deux mains serrées, en trait d'or.",
     desc:"Deux mains qui se serrent, tracées d'un trait d'or, et la parole que l'on se donne à la messe : la paix du Christ.",
     mockup:{ type:"tshirt", image:"assets/img/tshirt-paix-du-christ-or.jpg" },
-    couleurs:["blanc","rose"],
+    couleurs:["blanc"],
     tailles:["S","M","L","XL","2XL"],
     details:[
       ["Matière","100 % coton peigné bio, 180 g/m²"],
@@ -444,7 +444,7 @@ window.PRODUITS = [
     resume:"La même poignée de main, fond aquarelle.",
     desc:"La même poignée de main, posée sur un lavis d'aquarelle doré. Plus vivant que la version au trait seul.",
     mockup:{ type:"tshirt", image:"assets/img/tshirt-paix-du-christ-aquarelle.jpg" },
-    couleurs:["blanc","rose"],
+    couleurs:["blanc"],
     tailles:["S","M","L","XL","2XL"],
     details:[
       ["Matière","100 % coton peigné bio, 180 g/m²"],
@@ -464,7 +464,7 @@ window.PRODUITS = [
    --------------------------------------------------------- */
 window.LIBELLES = {
   couleurs:{
-    blanc:"Blanc & or", violet:"Violet", rouge:"Rouge", vert:"Vert",
+    blanc:"Blanc", violet:"Violet", rouge:"Rouge", vert:"Vert",
     bleu:"Bleu marial", rose:"Rose", noir:"Noir", nacre:"Nacré ivoire",
     imprime:"Imprimé"
   },
