@@ -3,4 +3,4 @@ Allow: /
 Disallow: /panier.html
 Disallow: /mentions.html
 
-Sitemap: https://www.annonce-levangile.fr/sitemap.xml
+Sitemap: https://www.annoncelevangile.com/sitemap.xml

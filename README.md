@@ -40,7 +40,7 @@ pied de page, panier), `assets/style.css`.
 2. **`mentions.html`** — remplir les éléments entre crochets : statut, SIRET, adresse, hébergeur,
    médiateur de la consommation. Ces mentions sont obligatoires pour un site marchand en France.
 3. **Le paiement** — voir plus bas.
-4. **`robots.txt` et `sitemap.xml`** — y remplacer `annonce-levangile.fr` par le vrai domaine.
+4. **`robots.txt` et `sitemap.xml`** — y remplacer `annoncelevangile.com` par le vrai domaine.
 
 ---
 
@@ -174,7 +174,7 @@ client l'aperçu de *sa* parole.
 
 Le plus simple, gratuit et sans compétence technique : **Netlify Drop** (`app.netlify.com/drop`).
 Glissez-y le dossier du site entier, le site est en ligne en une minute.
-Vous pourrez ensuite y brancher un nom de domaine (`annonce-levangile.fr`, environ 10 € par an).
+Vous pourrez ensuite y brancher un nom de domaine (`annoncelevangile.com`, environ 10 € par an).
 
 Pour travailler dessus en local, ouvrez simplement `index.html` dans le navigateur.
 

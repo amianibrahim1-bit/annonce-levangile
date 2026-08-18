@@ -3,7 +3,7 @@
 Hébergement gratuit, HTTPS compris. Le dossier du site est déjà un dépôt Git prêt à être envoyé.
 
 > Deux informations à remplacer partout dans ce document :
-> `VOTRE-DOMAINE.fr` (le nom acheté chez Namecheap) et `VOTRE-PSEUDO` (votre identifiant GitHub).
+> `annoncelevangile.com` (le nom acheté chez Namecheap) et `amianibrahim1-bit` (votre identifiant GitHub).
 
 ---
 
@@ -24,7 +24,7 @@ Depuis le dossier du site, dans le Terminal :
 
 ```bash
 cd ~/Documents/"App autres"/bandanas-de-marie
-git remote add origin https://github.com/VOTRE-PSEUDO/annonce-levangile.git
+git remote add origin https://github.com/amianibrahim1-bit/annonce-levangile.git
 git push -u origin main
 ```
 
@@ -43,13 +43,13 @@ Dans le dépôt sur GitHub : **Settings → Pages**.
 - **Source** : `Deploy from a branch`
 - **Branch** : `main`, dossier `/ (root)` → **Save**
 
-Au bout d'une minute, le site est visible sur `https://VOTRE-PSEUDO.github.io/annonce-levangile/`.
+Au bout d'une minute, le site est visible sur `https://amianibrahim1-bit.github.io/annonce-levangile/`.
 
 ## 4. Brancher le nom de domaine
 
 ### a) Côté GitHub
 
-**Settings → Pages → Custom domain** : taper `VOTRE-DOMAINE.fr` puis **Save**.
+**Settings → Pages → Custom domain** : taper `annoncelevangile.com` puis **Save**.
 GitHub crée alors un fichier `CNAME` dans le dépôt : c'est normal, il faut le garder.
 
 ### b) Côté Namecheap
@@ -67,7 +67,7 @@ Puis **Add New Record**, sept lignes en tout :
 | A Record | @ | 185.199.109.153 | Automatic |
 | A Record | @ | 185.199.110.153 | Automatic |
 | A Record | @ | 185.199.111.153 | Automatic |
-| CNAME Record | www | VOTRE-PSEUDO.github.io. | Automatic |
+| CNAME Record | www | amianibrahim1-bit.github.io. | Automatic |
 
 Les quatre adresses A sont celles de GitHub Pages, elles sont identiques pour tout le monde.
 Le point final après `.github.io.` est voulu.
@@ -86,7 +86,7 @@ Le certificat est gratuit et se renouvelle tout seul.
 - `assets/config.js` : l'adresse e-mail et les réseaux sociaux.
 - `mentions.html` : SIRET, adresse, hébergeur (**GitHub, Inc., 88 Colin P. Kelly Jr. Street,
   San Francisco, CA 94107, USA**), médiateur.
-- `robots.txt` et `sitemap.xml` : remplacer `annonce-levangile.fr` par le vrai domaine.
+- `robots.txt` et `sitemap.xml` : remplacer `annoncelevangile.com` par le vrai domaine.
 
 ## 6. Publier une modification, plus tard
 

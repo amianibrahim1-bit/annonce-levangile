@@ -11,7 +11,7 @@ window.CFG = {
   baseline: "ALE · Vêtements & objets de foi",
 
   /* --- Contact (remplacez par les vraies coordonnées) --- */
-  email: "contact@annonce-levangile.fr",
+  email: "contact@annoncelevangile.com",
   telephone: "",                     // ex : "+33 6 12 34 56 78" (laisser vide pour masquer)
   whatsapp: "",                      // ex : "33612345678" (sans + ni espaces) — active le bouton WhatsApp
   instagram: "",                     // ex : "https://instagram.com/annonce.levangile"
