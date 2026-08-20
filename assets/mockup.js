@@ -1,15 +1,4 @@
-/* =========================================================
-   Annonce l’Évangile — générateur de visuels (SVG)
-   ---------------------------------------------------------
-   Tous les visuels du site sont dessinés par ce fichier :
-   t-shirts, bandanas et chapelets. Aucun fichier image n'est
-   nécessaire, et le verset tiré au sort s'imprime en direct
-   sur le t-shirt.
-
-   ➜ Le jour où vous aurez de vraies photos de vos articles,
-     remplacez simplement les appels MOCK.xxx() par des
-     balises <img>. Voir README.md.
-   ========================================================= */
+/* Annonce l'Évangile — composition des visuels d'articles. */
 
 (function (global) {
 
@@ -156,9 +145,7 @@
      1) T-SHIRT
      opts = { couleur, design, verset:{t,r}, vue:"grand"|"vignette" }
      ========================================================= */
-  /* Les gabarits photo. Pour chacun : le centre de la zone d'impression
-     et l'échelle du dessin, exprimés en fraction de la largeur de l'image,
-     mesurés sur les exemples imprimés fournis. */
+  /* Gabarits : centre et échelle de la zone d'impression. */
   const GABARITS = {
     "blanc" : { img:"assets/img/tee-blanc.jpg", cx:0.4998, cy:0.4360, ech:0.001150,
                 pal:{ encre:"#2A2420", or:"#A9822F" }, fusion:"multiply", nom:"Blanc" },

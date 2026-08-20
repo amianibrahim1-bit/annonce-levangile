@@ -114,7 +114,6 @@
     { h:"boutique.html", t:"La boutique", sous:[
       { h:"boutique.html", t:"Tout voir" },
       { h:"boutique.html?cat=bandana", t:"Bandanas" },
-      { h:"boutique.html?cat=chapelet", t:"Chapelets" },
       { h:"boutique.html?cat=tshirt", t:"T-shirts" }
     ]},
     { h:"a-propos.html", t:"La maison" },
@@ -220,7 +219,6 @@
             <ul>
               <li><a href="pain-de-vie.html">Pain de Vie</a></li>
               <li><a href="boutique.html?cat=bandana">Bandanas</a></li>
-              <li><a href="boutique.html?cat=chapelet">Chapelets</a></li>
               <li><a href="boutique.html?cat=tshirt">T-shirts</a></li>
               <li><a href="boutique.html">Tout voir</a></li>
             </ul>
@@ -309,7 +307,10 @@
 
   function produitParId(id){ return (w.PRODUITS || []).find(p => p.id === id); }
 
-  w.Site = { $, $$, prix, libCouleur, toast, Panier, carteProduit, produitParId, logoSVG, inscription, init };
+  /* les articles retirés de la vente ne s'affichent nulle part */
+  function catalogue(){ return (w.PRODUITS || []).filter(p => p.dispo !== false); }
+
+  w.Site = { $, $$, prix, libCouleur, toast, Panier, carteProduit, produitParId, catalogue, logoSVG, inscription, init };
 
   if(d.readyState === "loading") d.addEventListener("DOMContentLoaded", init);
   else init();

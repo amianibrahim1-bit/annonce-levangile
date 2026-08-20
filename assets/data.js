@@ -1,11 +1,5 @@
-/* =========================================================
-   Annonce l’Évangile — données du site
-   • PAROLES : versets (Louis Segond 1910, domaine public)
-     et paroles de saints (domaine public).
-   • PRODUITS : catalogue de la boutique.
-   Pour ajouter une parole ou un produit : copiez une ligne
-   existante et modifiez-la. Rien d'autre à toucher.
-   ========================================================= */
+/* Annonce l'Évangile — paroles et catalogue.
+   Versets : traduction Louis Segond, domaine public. */
 
 /* ---------------------------------------------------------
    1) LES PAROLES DU PAIN DE VIE
@@ -196,6 +190,7 @@ window.PRODUITS = [
     id:"chapelet-nacre",
     nom:"Chapelet perles nacrées",
     cat:"chapelet",
+    dispo:false,   /* retiré de la vente pour le moment */
     prix:34,
     resume:"Perles nacrées ivoire, croix et médaille argentées.",
     desc:"Notre chapelet classique : cinquante-neuf perles nacrées ivoire, montées une à une sur chaîne argentée, croix ciselée et médaille miraculeuse au centre. Livré dans une pochette de velours : c'est le cadeau de baptême, de communion ou de confirmation par excellence.",
@@ -214,6 +209,7 @@ window.PRODUITS = [
     id:"chapelet-bleu-marial",
     nom:"Chapelet bleu marial",
     cat:"chapelet",
+    dispo:false,   /* retiré de la vente pour le moment */
     prix:34,
     resume:"Le bleu de Marie, monté sur chaîne argentée.",
     desc:"Le même montage soigné que notre chapelet nacré, dans le bleu profond de la Vierge. Un chapelet qui se voit peu et se tient bien en main.",
@@ -232,6 +228,7 @@ window.PRODUITS = [
     id:"chapelet-noir-homme",
     nom:"Chapelet noir",
     cat:"chapelet",
+    dispo:false,   /* retiré de la vente pour le moment */
     prix:36,
     resume:"Perles noires mates, croix de Saint-Benoît.",
     desc:"Un chapelet sobre et solide, pensé pour être porté tous les jours : perles noires mates de 8 mm et croix de Saint-Benoît. Le préféré des hommes et des pèlerins.",
@@ -250,6 +247,7 @@ window.PRODUITS = [
     id:"dizainier-poche",
     nom:"Dizainier de poche",
     cat:"chapelet",
+    dispo:false,   /* retiré de la vente pour le moment */
     prix:16,
     resume:"Une dizaine à emporter partout.",
     desc:"Dix perles et une croix : le chapelet de ceux qui prient dans le train, à l'hôpital, en marchant. Assez petit pour tenir au fond d'une poche, assez beau pour être offert.",
@@ -456,12 +454,7 @@ window.PRODUITS = [
   }
 ];
 
-/* ---------------------------------------------------------
-   3) LIBELLÉS
-   Les couleurs de la boutique sont celles de la liturgie.
-   `couleurs` = le nom court (panier, vignettes)
-   `saisons`  = le temps liturgique correspondant (fiche produit)
-   --------------------------------------------------------- */
+/* Libellés des couleurs et des catégories. */
 window.LIBELLES = {
   couleurs:{
     blanc:"Blanc", violet:"Violet", rouge:"Rouge", vert:"Vert",

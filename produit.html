@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Article | Annonce l’Évangile</title>
-<meta name="description" content="Bandanas, chapelets et t-shirts chrétiens, fabriqués en petite quantité et expédiés d'Europe.">
+<meta name="description" content="T-shirts chrétiens et bandanas mariaux, fabriqués en petite quantité et expédiés d'Europe.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)'%3E%3Cpath d='M8,8 L40,8 L24,24 Z' fill='%23563A76'/%3E%3Cpath d='M40,8 L40,40 L24,24 Z' fill='%238E2431'/%3E%3Cpath d='M8,40 L40,40 L24,24 Z' fill='%232E6B4F'/%3E%3Cpath d='M8,8 L8,40 L24,24 Z' fill='%23EBDDBC'/%3E%3C/g%3E%3Cg stroke='%23B08A3E' stroke-width='4.5' stroke-linecap='round'%3E%3Cline x1='24' y1='12' x2='24' y2='36'/%3E%3Cline x1='14' y1='20' x2='34' y2='20'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=202608190024">
+<link rel="stylesheet" href="assets/style.css?v=202608210138">
 </head>
 <body>
 
@@ -32,11 +32,11 @@
 
 <div id="pied-site"></div>
 
-<script src="assets/config.js?v=202608190024"></script>
-<script src="assets/liturgie.js?v=202608190024"></script>
-<script src="assets/data.js?v=202608190024"></script>
-<script src="assets/mockup.js?v=202608190024"></script>
-<script src="assets/site.js?v=202608190024"></script>
+<script src="assets/config.js?v=202608210138"></script>
+<script src="assets/liturgie.js?v=202608210138"></script>
+<script src="assets/data.js?v=202608210138"></script>
+<script src="assets/mockup.js?v=202608210138"></script>
+<script src="assets/site.js?v=202608210138"></script>
 <script>
 (function(){
   /* les couleurs de la liturgie */
@@ -50,7 +50,7 @@
   const id = new URLSearchParams(location.search).get("id");
   const p  = Site.produitParId(id);
 
-  if(!p){ location.replace("boutique.html"); return; }
+  if(!p || p.dispo === false){ location.replace("boutique.html"); return; }
   if(p.cat === "pdv"){ location.replace("pain-de-vie.html"); return; }
 
   document.title = p.nom + " | Annonce l’Évangile";
@@ -103,8 +103,7 @@
         </details>
         <details>
           <summary>Entretien</summary>
-          <div class="corps">Lavage à 30° sur l'envers, sans adoucissant, séchage à l'air libre.
-            Les chapelets se rangent dans leur pochette : le velours protège les perles et la chaîne.</div>
+          <div class="corps">Lavage à 30° sur l'envers, sans adoucissant, séchage à l'air libre.</div>
         </details>
         <details>
           <summary>Pour offrir</summary>
@@ -177,7 +176,7 @@
   });
 
   /* suggestions */
-  const suite = PRODUITS.filter(x => x.id !== p.id)
+  const suite = Site.catalogue().filter(x => x.id !== p.id)
     .sort((a,b)=>(a.cat===p.cat?-1:0)-(b.cat===p.cat?-1:0))
     .slice(0,3);
   Site.$("#suite").innerHTML = suite.map(Site.carteProduit).join("");

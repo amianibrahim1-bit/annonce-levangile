@@ -1,13 +1,4 @@
-/* =========================================================
-   Annonce l'Évangile — le temps liturgique
-   ---------------------------------------------------------
-   Calcule le temps liturgique du jour (rite romain) et la
-   couleur qui lui correspond. Sert au bandeau du site, à la
-   page Pain de Vie et à la section « Les couleurs du temps ».
-
-   Aucune donnée à mettre à jour : la date de Pâques est
-   recalculée chaque année.
-   ========================================================= */
+/* Annonce l'Évangile — temps liturgique du jour et sa couleur. */
 
 (function (w) {
 

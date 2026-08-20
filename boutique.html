@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>La boutique : bandanas, chapelets et t-shirts | Annonce l’Évangile</title>
-<meta name="description" content="Bandanas mariaux en coton, chapelets montés à la main et t-shirts chrétiens en coton biologique. Livraison en France, Belgique, Suisse et Canada.">
+<title>La boutique : t-shirts et bandanas | Annonce l’Évangile</title>
+<meta name="description" content="Bandanas mariaux en coton, t-shirts chrétiens en coton biologique et bandanas mariaux. Livraison en France, Belgique, Suisse et Canada.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg transform='rotate(45 24 24)'%3E%3Cpath d='M8,8 L40,8 L24,24 Z' fill='%23563A76'/%3E%3Cpath d='M40,8 L40,40 L24,24 Z' fill='%238E2431'/%3E%3Cpath d='M8,40 L40,40 L24,24 Z' fill='%232E6B4F'/%3E%3Cpath d='M8,8 L8,40 L24,24 Z' fill='%23EBDDBC'/%3E%3C/g%3E%3Cg stroke='%23B08A3E' stroke-width='4.5' stroke-linecap='round'%3E%3Cline x1='24' y1='12' x2='24' y2='36'/%3E%3Cline x1='14' y1='20' x2='34' y2='20'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=202608190024">
+<link rel="stylesheet" href="assets/style.css?v=202608210138">
 </head>
 <body>
 
@@ -47,23 +47,21 @@
 
 <div id="pied-site"></div>
 
-<script src="assets/config.js?v=202608190024"></script>
-<script src="assets/liturgie.js?v=202608190024"></script>
-<script src="assets/data.js?v=202608190024"></script>
-<script src="assets/mockup.js?v=202608190024"></script>
-<script src="assets/site.js?v=202608190024"></script>
+<script src="assets/config.js?v=202608210138"></script>
+<script src="assets/liturgie.js?v=202608210138"></script>
+<script src="assets/data.js?v=202608210138"></script>
+<script src="assets/mockup.js?v=202608210138"></script>
+<script src="assets/site.js?v=202608210138"></script>
 <script>
 (function(){
   const CATS = [
     { id:null, t:"Tout voir" },
     { id:"pdv", t:"Pain de Vie" },
     { id:"bandana", t:"Bandanas" },
-    { id:"chapelet", t:"Chapelets" },
     { id:"tshirt", t:"T-shirts" }
   ];
   const TEXTES = {
     bandana:{ t:"Les bandanas", i:"Coton doux, bord roulotté, 55 × 55 cm." },
-    chapelet:{ t:"Les chapelets", i:"Perles montées une à une, pochette de velours. Le cadeau de communion ou de confirmation." },
     tshirt:{ t:"Les t-shirts", i:"Coton biologique 180 g/m², dessins sobres imprimés en Europe." },
     pdv:{ t:"Le Pain de Vie", i:"Une parole tirée pour vous, imprimée sur votre t-shirt. Chaque pièce est unique." }
   };
@@ -73,7 +71,7 @@
   if(!TEXTES[courante]) courante = null;
 
   function rendre(){
-    const liste = courante ? PRODUITS.filter(p => p.cat === courante) : PRODUITS.slice();
+    const liste = Site.catalogue().filter(p => !courante || p.cat === courante);
     Site.$("#grille").innerHTML = liste.map(Site.carteProduit).join("");
     Site.$("#compte").textContent = liste.length + (liste.length > 1 ? " articles" : " article");
 

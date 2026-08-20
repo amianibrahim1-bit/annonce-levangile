@@ -1,9 +1,4 @@
-/* =========================================================
-   Annonce l’Évangile — configuration de la boutique
-   ---------------------------------------------------------
-   👉 C'EST LE SEUL FICHIER À MODIFIER pour vos coordonnées,
-      vos frais de port et vos liens de paiement.
-   ========================================================= */
+/* Annonce l'Évangile — réglages de la boutique. */
 
 window.CFG = {
   /* --- Identité --- */
@@ -12,26 +7,23 @@ window.CFG = {
 
   /* --- Contact (remplacez par les vraies coordonnées) --- */
   email: "contact@annoncelevangile.com",
-  telephone: "",                     // ex : "+33 6 12 34 56 78" (laisser vide pour masquer)
-  whatsapp: "",                      // ex : "33612345678" (sans + ni espaces) — active le bouton WhatsApp
-  instagram: "",                     // ex : "https://instagram.com/annonce.levangile"
+  telephone: "",
+  whatsapp: "",
+  instagram: "",
   facebook: "",
   ville: "France",
 
   /* --- Livraison --- */
   livraison: {
-    prix: 4.9,                       // frais de port standard (€)
-    gratuiteDes: 60,                 // franco de port à partir de ce montant (€) — 0 pour désactiver
+    prix: 4.9,
+    gratuiteDes: 60,
     delai: "3 à 6 jours ouvrés",
     zones: "France, Belgique, Suisse, Luxembourg, Canada"
   },
 
-  /* --- Paiement ---
-     Tant que `paiementActif` est false, le panier génère une commande
-     par e-mail (aucun paiement en ligne). Quand vous aurez ouvert un
-     compte Stripe / SumUp / PayPal, mettez `true` et collez le lien.  */
+  /* --- Paiement --- */
   paiementActif: false,
-  lienPaiement: "",                  // ex : "https://buy.stripe.com/xxxxx"
+  lienPaiement: "",
 
   /* --- Devise --- */
   devise: "€"
