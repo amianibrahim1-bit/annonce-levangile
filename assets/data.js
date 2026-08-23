@@ -435,6 +435,25 @@ window.PRODUITS = [
   },
 
   {
+    id:"tshirt-jean-xxiii",
+    nom:"T-shirt Saint Jean XXIII",
+    cat:"tshirt",
+    prix:32,
+    resume:"Le motif du bandana, sur tout le t-shirt.",
+    desc:"Le portrait de saint Jean XXIII en médaillons, sur le damier bleu et jaune aux clés de saint Pierre. Le motif couvre tout le vêtement, devant comme dos, exactement comme notre bandana : les deux se portent ensemble.",
+    mockup:{ type:"photo", image:"assets/img/tee-motif-jean-xxiii.jpg" },
+    couleurs:["blanc"],
+    tailles:["S","M","L","XL","2XL"],
+    details:[
+      ["Matière","100 % coton peigné bio, 180 g/m²"],
+      ["Coupe","Unisexe, droite, col rond côtelé"],
+      ["Impression","Motif intégral, teinture par sublimation"],
+      ["Fabrication","Imprimé en Europe"],
+      ["Entretien","Lavage 30°, à l'envers, sans sèche-linge"]
+    ]
+  },
+
+  {
     id:"tshirt-paix-du-christ-aquarelle",
     nom:"T-shirt La paix du Christ, aquarelle",
     cat:"tshirt",

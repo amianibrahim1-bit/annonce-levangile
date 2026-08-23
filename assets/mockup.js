@@ -192,12 +192,17 @@
     return `<svg viewBox="0 0 ${COTE} ${COTE}" xmlns="http://www.w3.org/2000/svg" role="img"
       aria-label="T-shirt ${esc(g.nom)}">
       <defs>
+        <!-- détourage : seul le blanc du fichier devient transparent,
+             les couleurs gardent toute leur densité -->
         <filter id="${uid}ko" x="-2%" y="-2%" width="104%" height="104%"
                 color-interpolation-filters="sRGB">
           <feColorMatrix type="matrix" values="1 0 0 0 0
                                                0 1 0 0 0
                                                0 0 1 0 0
-                                               -1.33 -1.33 -1.33 3.62 0"/>
+                                               -0.33 -0.33 -0.34 1 0"/>
+          <feComponentTransfer>
+            <feFuncA type="linear" slope="16.7" intercept="-0.67"/>
+          </feComponentTransfer>
         </filter>
       </defs>
       <image href="${g.img}" x="0" y="0" width="${COTE}" height="${COTE}"/>
@@ -208,6 +213,14 @@
 
   /* nom lisible d'un gabarit */
   function gabarits(){ return GABARITS; }
+
+  /* visuel déjà composé : on l'affiche tel quel */
+  function photo(src, alt){
+    return `<svg viewBox="0 0 ${COTE} ${COTE}" xmlns="http://www.w3.org/2000/svg" role="img"
+      aria-label="${esc(alt || "")}">
+      <image href="${esc(src)}" x="0" y="0" width="${COTE}" height="${COTE}"/>
+    </svg>`;
+  }
 
   /* --- impression d'un verset au centre de la poitrine ---
      Tout est calé sur LARGEUR : le corps du texte diminue jusqu'à ce
@@ -555,6 +568,7 @@
     if(!p) return "";
     const c = couleur || (p.couleurs && p.couleurs[0]);
     const m = p.mockup || {};
+    if(m.type === "photo")    return photo(m.image, p.nom);
     if(m.type === "bandana")  return bandana({ motif:m.motif, couleur:c, image:m.image, alt:p.nom });
     if(m.type === "chapelet") return chapelet({ couleur:c, dizainier:m.dizainier });
     return tshirt({ couleur:c, design:m.design, image:m.image, verset: verset || m.versetDemo || {
@@ -670,6 +684,6 @@
     </svg>`;
   }
 
-  global.MOCK = { tshirt, bandana, chapelet, produit, pain, etape, imprimeVerset, gabarits, croix, lys, etoile, epi, monogramme };
+  global.MOCK = { tshirt, bandana, chapelet, produit, photo, pain, etape, imprimeVerset, gabarits, croix, lys, etoile, epi, monogramme };
 
 })(window);

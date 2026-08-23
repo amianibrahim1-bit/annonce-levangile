@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=202608210138">
+<link rel="stylesheet" href="assets/style.css?v=20260823092523">
 </head>
 <body>
 
@@ -32,11 +32,11 @@
 
 <div id="pied-site"></div>
 
-<script src="assets/config.js?v=202608210138"></script>
-<script src="assets/liturgie.js?v=202608210138"></script>
-<script src="assets/data.js?v=202608210138"></script>
-<script src="assets/mockup.js?v=202608210138"></script>
-<script src="assets/site.js?v=202608210138"></script>
+<script src="assets/config.js?v=20260823092523"></script>
+<script src="assets/liturgie.js?v=20260823092523"></script>
+<script src="assets/data.js?v=20260823092523"></script>
+<script src="assets/mockup.js?v=20260823092523"></script>
+<script src="assets/site.js?v=20260823092523"></script>
 <script>
 (function(){
   /* les couleurs de la liturgie */
@@ -114,7 +114,8 @@
     </div>`;
 
   function dessiner(){
-    Site.$("#visuel").innerHTML = (p.cat === "tshirt" || p.cat === "pdv")
+    const surGabarit = (p.cat === "tshirt" || p.cat === "pdv") && p.mockup.type !== "photo";
+    Site.$("#visuel").innerHTML = surGabarit
       ? MOCK.tshirt({ couleur:couleur, vue:(vue === "porte" ? "porte" : null),
                       image:p.mockup.image, design:p.mockup.design,
                       verset:{ t:"Je suis le pain de vie.", r:"Jean 6, 35" } })
@@ -155,7 +156,9 @@
 
   function rendreVues(){
     const boite = Site.$("#vues");
-    if(p.cat !== "tshirt" && p.cat !== "pdv"){ boite.style.display = "none"; return; }
+    if((p.cat !== "tshirt" && p.cat !== "pdv") || p.mockup.type === "photo"){
+      boite.style.display = "none"; return;
+    }
     const dispo = couleur === "blanc" ? [["plat","À plat"],["porte","Porté"]] : [["plat","À plat"]];
     boite.innerHTML = dispo.map(([v,t])=>
       `<button class="puce${v===vue?" on":""}" data-v="${v}">${t}</button>`).join("");
